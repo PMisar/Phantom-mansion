@@ -1,0 +1,68 @@
+body 
+{
+  margin: 0;
+  padding: 5%;
+  background-color: black;
+  color: orange;
+  text-align: center;
+  /* font-family: 'The Halloween', sans-serif; */
+  font-family: 'Creepster';font-size: 35px;
+}
+
+#game-intro 
+{
+  padding: 200px 0px;
+}
+
+#start-button 
+{
+  font-family: 'Creepster';font-size: 30px;
+  background-color: #B9823B;
+  border-radius: 10%;
+  margin-top: 40px;
+  padding: 15px;
+}
+
+#game-container 
+{
+  display: flex;
+  padding: 10px 0px;
+  justify-content: center;
+}
+
+#game-screen 
+{
+  text-align: left;
+  display: none;
+  align-content: center;
+  padding: 20px 0px;
+  overflow: hidden;
+  position: relative;
+  background-image: url(./images/level0.png);
+  background-size: cover;
+  /* animation: slide 5s linear infinite; */
+  }
+
+  .platform {
+    background-image: url("./images/platform.png");
+    background-size: 100% 100%; /* Adjust to fit the platform size */
+  }
+
+  /* levitation */
+  /* #player 
+  {
+    animation: levitate 1s ease-in-out infinite;
+  }
+  
+  @keyframes levitate 
+  {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  } */
