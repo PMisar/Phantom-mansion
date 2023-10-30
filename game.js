@@ -59,7 +59,7 @@ class Game
     //   }
     // }ne
 
-    // added to change levels
+    // level change onto the next one
     //  if (this.player.posY < 0) {
     //   this.playerPos++;
     //   if (this.playerPos === this.height) {
