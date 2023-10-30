@@ -22,7 +22,7 @@ function createPlatforms(gameScreen) {
   const platforms = [];
 
   // platforms position (top left corner starting at 0)
-  // left = direction  
+  // left = direction X 
   // top = direction Y
   const platformPositions = [
     { left: 600, top: 600 },
@@ -31,9 +31,7 @@ function createPlatforms(gameScreen) {
     { left: 500, top: 100 },
     { left: 100, top: 500 },
     { left: 500, top: 300 },
-    { left: 600, top: 500 },
     { left: 700, top: 200 },
-    { left: 400, top: 200 },
     { left: 300, top: 300 },
   ];
 

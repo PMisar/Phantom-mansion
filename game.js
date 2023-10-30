@@ -6,12 +6,9 @@ class Game {
     this.player = new Player(this.gameScreen, 420, 580, 70, 100, "./images/player-right.png");
     this.height = 700;
     this.width = 1000;
-
-    //added to change levels
-    this.levels = ["./images/level0.png", "./images/level1.png", "./images/level2.png", "./images/level3.png"]; // 4 lever images
+    this.levels = ["./images/level0.png", "./images/level1.png", "./images/level2.png", "./images/level3.png"]; // 4 level images
     this.currentLevel = 0;
     this.levelCounter = document.getElementById("level"); // to update level count 
-
     this.gameIsOver = false;
     this.initialRun = true;
   }
@@ -20,11 +17,7 @@ class Game {
     this.gameScreen.style.height = `${this.height}px`;
     this.gameScreen.style.width = `${this.width}px`;
 
-    //added to change levels
-    // this.gameScreen.style.backgroundImage = `url('${this.levels[this.currentLevel]}')`;
-
     this.startScreen.style.display = "none";
-
     this.gameScreen.style.display = "block";
 
     this.gameLoop();
@@ -41,24 +34,22 @@ class Game {
 
   update() {
     this.player.move();
-    // standing on a platform
-    for (const platform of platforms) {
+    
+    for (const platform of platforms) {   // standing on a platform
       if (this.player.isCollidingWith(platform)) {
         this.player.handlePlatformCollision(platform);
       }
     }
     if (this.player.top + this.player.height <= 0) {
-      // Check if there are more levels
-      if (this.currentLevel < this.levels.length - 1) {
+      if (this.currentLevel < this.levels.length - 1) {   // to check if there are more levels
         this.currentLevel++;
         this.gameScreen.style.backgroundImage = `url('${this.levels[this.currentLevel]}')`;
         this.player.top = 580;
-        this.updateLevelCounter(); // Update the level counter
-      } else {
-        // You've completed all levels (you can add a win screen logic here)
-      }
+        this.updateLevelCounter(); // to update the level counter
+      } 
     }
   }
+
   updateLevelCounter() {
     this.levelCounter.textContent = this.currentLevel; // Update the level counter text
   }

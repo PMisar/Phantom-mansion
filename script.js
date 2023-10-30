@@ -76,11 +76,11 @@ window.onload = function ()
     //jumping
     if ((key === "arrowup" || key === "w") && game.player.isJumping) 
     {
-      game.player.isJumping = false;
+      // game.player.isJumping = false;
 
       //code so that char jumps once... replace line above
-      // game.player.velocityY = game.player.jumpStrength;
-      // game.player.isJumping = true;
+      game.player.velocityY = game.player.jumpStrength;
+      game.player.isJumping = true;
     }
 
     const keyMappings = 

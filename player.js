@@ -70,10 +70,6 @@ class Player
     this.left += this.directionX;
     this.top += this.directionY;
 
-    //added to change levels
-    // this.element.style.left = `${this.posX}px`;
-    // this.element.style.top = `${this.posY}px`;
-
     if (this.directionX < 0) 
     {
       this.imageSrc = "./images/player-left.png"; // left-facing image source
@@ -82,23 +78,16 @@ class Player
       this.imageSrc = "./images/player-right.png"; // right-facing image source
     }
 
-    this.left = Math.max(15, Math.min(this.gameScreen.offsetWidth - this.width - 15, this.left));
+    this.left = Math.max(10, Math.min(this.gameScreen.offsetWidth - this.width - 10, this.left));
     // this.top = Math.max(10, Math.min(this.gameScreen.offsetHeight - this.height - 10, this.top)); //for border at the top
-    this.top = Math.min(this.gameScreen.offsetHeight - this.height - 15, this.top);
+    this.top = Math.min(this.gameScreen.offsetHeight - this.height - 10, this.top);
 
     this.updatePosition();
   }
-  //added to change levels
-  // setPosition(x, y) {
-  //   this.posX = x;
-  //   this.posY = y;
-  //   this.element.style.left = `${this.posX}px`;
-  //   this.element.style.top = `${this.posY}px`;
-  // }
 
   updatePosition() 
   {
-    this.element.src = this.imageSrc; // player facing left image
+    this.element.src = this.imageSrc; 
     this.element.style.left = `${this.left}px`;
     this.element.style.top = `${this.top}px`;
   }
