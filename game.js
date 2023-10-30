@@ -1,24 +1,22 @@
-class Game 
-{
-  constructor() 
-  {
+class Game {
+  constructor() {
     this.startScreen = document.querySelector("#game-intro");
     this.gameScreen = document.querySelector("#game-screen");
     this.gameEndScreen = document.querySelector("#game-end");
-    this.player = new Player(this.gameScreen, 420, 580, 150, 150, "./images/player-right.png");
+    this.player = new Player(this.gameScreen, 420, 580, 70, 100, "./images/player-right.png");
     this.height = 700;
     this.width = 1000;
 
     //added to change levels
-    // this.levels = ["./images/level0.png", "./images/level1.png", "./images/level2.png", "./images/level3.png"];
-    // this.currentLevel = 0;
-    // this.playerPos = 0;
+    this.levels = ["./images/level0.png", "./images/level1.png", "./images/level2.png", "./images/level3.png"]; // 4 lever images
+    this.currentLevel = 0;
+    this.levelCounter = document.getElementById("level"); // to update level count 
 
     this.gameIsOver = false;
+    this.initialRun = true;
   }
 
-  start() 
-  {
+  start() {
     this.gameScreen.style.height = `${this.height}px`;
     this.gameScreen.style.width = `${this.width}px`;
 
@@ -32,10 +30,8 @@ class Game
     this.gameLoop();
   }
 
-  gameLoop() 
-  {
-    if (this.gameIsOver) 
-    {
+  gameLoop() {
+    if (this.gameIsOver) {
       return;
     }
     this.update();
@@ -43,36 +39,29 @@ class Game
     window.requestAnimationFrame(() => this.gameLoop());
   }
 
-  update() 
-  {
+  update() {
     this.player.move();
-
-    // collisions with platforms
-    // for (const platform of this.platforms) 
-    // {
-    //   if (this.player.isCollidingWith(platform)) 
-    //   {
-    //     // char is colliding with the platform
-    //     this.player.top = platform.top - this.player.height;
-    //     this.player.velocityY = 0; // stop vertical movement
-    //     this.player.isJumping = false; // reset jump state
-    //   }
-    // }ne
-
-    // level change onto the next one
-    //  if (this.player.posY < 0) {
-    //   this.playerPos++;
-    //   if (this.playerPos === this.height) {
-    //     this.playerPos = 0;
-    //     this.currentLevel++;
-    //     if (this.currentLevel < this.levels.length) {
-    //       this.gameScreen.style.backgroundImage = `url('${this.levels[this.currentLevel]}')`;
-    //     }
-    //   }
-    //   this.player.setPosition(this.player.posX, this.height - this.player.height - this.playerPos);
-    // }
+    // standing on a platform
+    for (const platform of platforms) {
+      if (this.player.isCollidingWith(platform)) {
+        this.player.handlePlatformCollision(platform);
+      }
+    }
+    if (this.player.top + this.player.height <= 0) {
+      // Check if there are more levels
+      if (this.currentLevel < this.levels.length - 1) {
+        this.currentLevel++;
+        this.gameScreen.style.backgroundImage = `url('${this.levels[this.currentLevel]}')`;
+        this.player.top = 580;
+        this.updateLevelCounter(); // Update the level counter
+      } else {
+        // You've completed all levels (you can add a win screen logic here)
+      }
+    }
   }
-
+  updateLevelCounter() {
+    this.levelCounter.textContent = this.currentLevel; // Update the level counter text
+  }
   //   endGame() {
   //     this.player.element.remove();
   //     this.gameIsOver = true;

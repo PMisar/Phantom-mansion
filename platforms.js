@@ -1,7 +1,5 @@
-class Platform 
-{
-  constructor(gameScreen, left, top, width, height) 
-  {
+class Platform {
+  constructor(gameScreen, left, top, width, height) {
     this.left = left;
     this.top = top;
     this.width = width;
@@ -9,7 +7,7 @@ class Platform
     this.gameScreen = gameScreen;
     this.element = document.createElement("div");
 
-    this.element.classList.add("platform"); 
+    this.element.classList.add("platform");
 
     this.element.style.position = "absolute";
     this.element.style.width = `${width}px`;
@@ -20,8 +18,7 @@ class Platform
   }
 }
 
-function createPlatforms(gameScreen) 
-{
+function createPlatforms(gameScreen) {
   const platforms = [];
 
   // platforms position (top left corner starting at 0)
@@ -41,7 +38,7 @@ function createPlatforms(gameScreen)
   ];
 
   platformPositions.forEach((position) => {
-    platforms.push(new Platform(gameScreen, position.left, position.top, 100, 28));
+    platforms.push(new Platform(gameScreen, position.left, position.top, 100, 25));
   });
   return platforms;
 }

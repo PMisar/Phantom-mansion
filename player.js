@@ -29,6 +29,32 @@ class Player
     this.isJumping = false;
   }
 
+  // standing on a platform
+  isCollidingWith(platform) {
+    const playerLeft = this.left;
+    const playerRight = this.left + this.width;
+    const playerTop = this.top;
+    const playerBottom = this.top + this.height;
+
+    const platformLeft = platform.left;
+    const platformRight = platform.left + platform.width;
+    const platformTop = platform.top;
+    const platformBottom = platform.top + platform.height;
+
+    return (
+      playerRight > platformLeft &&
+      playerLeft < platformRight &&
+      playerBottom > platformTop &&
+      playerTop < platformBottom
+    );
+  }
+
+  handlePlatformCollision(platform) {
+    this.top = platform.top - this.height;
+    this.velocityY = 0;
+    this.isJumping = false;
+  }
+
   move() 
   {
     //jump part
@@ -41,41 +67,27 @@ class Player
       this.isJumping = false;
     }
 
+    this.left += this.directionX;
+    this.top += this.directionY;
 
     //added to change levels
     // this.element.style.left = `${this.posX}px`;
     // this.element.style.top = `${this.posY}px`;
 
-    let jumpImageSrc = "./images/player-right.png"; // Default jump image source
-
-    if (this.directionX < 0) {
-        jumpImageSrc = "./images/player-left-jump.png"; // Jumping left image source
-    } else if (this.directionX > 0) {
-        jumpImageSrc = "./images/player-right-jump.png"; // Jumping right image source
+    if (this.directionX < 0) 
+    {
+      this.imageSrc = "./images/player-left.png"; // left-facing image source
+    } else if (this.directionX > 0) 
+    {
+      this.imageSrc = "./images/player-right.png"; // right-facing image source
     }
 
-    if (this.isJumping) {
-        // Set the image source to the jumping image
-        this.imageSrc = jumpImageSrc;
-    } else {
-        // Handle left and right movement images
-        if (this.directionX < 0) {
-            this.imageSrc = "./images/player-left.png"; // left-facing image source
-        } else if (this.directionX > 0) {
-            this.imageSrc = "./images/player-right.png"; // right-facing image source
-        }
-    }
-
-    
-    this.left += this.directionX;
-    this.top += this.directionY;
-    this.left = Math.max(10, Math.min(this.gameScreen.offsetWidth - this.width - 10, this.left));
+    this.left = Math.max(15, Math.min(this.gameScreen.offsetWidth - this.width - 15, this.left));
     // this.top = Math.max(10, Math.min(this.gameScreen.offsetHeight - this.height - 10, this.top)); //for border at the top
-    this.top = Math.min(this.gameScreen.offsetHeight - this.height - 0, this.top);
+    this.top = Math.min(this.gameScreen.offsetHeight - this.height - 15, this.top);
 
     this.updatePosition();
   }
-
   //added to change levels
   // setPosition(x, y) {
   //   this.posX = x;
@@ -90,27 +102,50 @@ class Player
     this.element.style.left = `${this.left}px`;
     this.element.style.top = `${this.top}px`;
   }
-
-  // isCollidingWith(platform) 
-  // {
-  //   // Calculate the edges of the player and the platform
-  //   const playerLeft = this.left;
-  //   const playerRight = this.left + this.width;
-  //   const playerTop = this.top;
-  //   const playerBottom = this.top + this.height;
-
-  //   const platformLeft = platform.left;
-  //   const platformRight = platform.left + platform.width;
-  //   const platformTop = platform.top;
-  //   const platformBottom = platform.top + platform.height;
-
-  //   // Check for collision
-  //   return (
-  //     playerRight > platformLeft &&
-  //     playerLeft < platformRight &&
-  //     playerBottom > platformTop &&
-  //     playerTop < platformBottom
-  //   );
-  // }
-
 }
+
+
+// move function with jump images (was putting default image player-right)
+// move() 
+//   {
+//     //jump part
+//     this.velocityY += this.gravity;
+//     this.top += this.velocityY;
+
+//     if (this.top > this.gameScreen.offsetHeight - this.height) {
+//       this.top = this.gameScreen.offsetHeight - this.height;
+//       this.velocityY = 0;
+//       this.isJumping = false;
+//     }
+
+
+//     //added to change levels
+//     // this.element.style.left = `${this.posX}px`;
+//     // this.element.style.top = `${this.posY}px`;
+
+//     let jumpImageSrc = "./images/player-right.png"; // Default jump image source
+
+//     if (this.directionX < 0) {
+//         jumpImageSrc = "./images/player-left-jump.png"; // Jumping left image source
+//     } else if (this.directionX > 0) {
+//         jumpImageSrc = "./images/player-right-jump.png"; // Jumping right image source
+//     }
+
+//     if (this.isJumping) {
+//         // Set the image source to the jumping image
+//         this.imageSrc = jumpImageSrc;
+//     } else {
+//         // Handle left and right movement images
+//         if (this.directionX < 0) {
+//             this.imageSrc = "./images/player-left.png"; // left-facing image source
+//         } else if (this.directionX > 0) {
+//             this.imageSrc = "./images/player-right.png"; // right-facing image source
+//         }
+//     }
+//     this.left += this.directionX;
+//     this.top += this.directionY;
+
+//     // ... (rest of your code)
+
+//     this.updatePosition();
+//      }
