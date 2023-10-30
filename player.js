@@ -1,7 +1,5 @@
-class Player 
-{
-  constructor(gameScreen, left, top, width, height, imgSrc) 
-  {
+class Player {
+  constructor(gameScreen, left, top, width, height, imgSrc) {
     this.left = left;
     this.top = top;
     this.width = width;
@@ -11,9 +9,6 @@ class Player
     this.gameScreen = gameScreen;
     this.imageSrc = imgSrc; // player facing left image
     this.element = document.createElement("img");
-    
-    // this.element.id = "player"; // line for levitating if needed
-
     this.element.src = imgSrc;
     this.element.style.position = "absolute";
     this.element.style.width = `${width}px`;
@@ -23,7 +18,7 @@ class Player
     this.gameScreen.appendChild(this.element);
 
     //jump part
-    this.velocityY = 3; // initial vertical velocity
+    this.velocityY = 0; // initial vertical velocity
     this.gravity = 0.3; // gravity strength
     this.jumpStrength = -6; // initial jump velocity (negative for upward movement)
     this.isJumping = false;
@@ -55,8 +50,7 @@ class Player
     this.isJumping = false;
   }
 
-  move() 
-  {
+  move() {
     //jump part
     this.velocityY += this.gravity;
     this.top += this.velocityY;
@@ -70,11 +64,9 @@ class Player
     this.left += this.directionX;
     this.top += this.directionY;
 
-    if (this.directionX < 0) 
-    {
+    if (this.directionX < 0) {
       this.imageSrc = "./images/player-left.png"; // left-facing image source
-    } else if (this.directionX > 0) 
-    {
+    } else if (this.directionX > 0) {
       this.imageSrc = "./images/player-right.png"; // right-facing image source
     }
 
@@ -85,9 +77,8 @@ class Player
     this.updatePosition();
   }
 
-  updatePosition() 
-  {
-    this.element.src = this.imageSrc; 
+  updatePosition() {
+    this.element.src = this.imageSrc;
     this.element.style.left = `${this.left}px`;
     this.element.style.top = `${this.top}px`;
   }
@@ -95,7 +86,7 @@ class Player
 
 
 // move function with jump images (was putting default image player-right)
-// move() 
+// move()
 //   {
 //     //jump part
 //     this.velocityY += this.gravity;

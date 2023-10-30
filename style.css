@@ -48,21 +48,7 @@ body
     background-size: 100% 100%; /* adjust to fit the platform size */
   }
 
-  /* levitation */
-  /* #player 
-  {
-    animation: levitate 1s ease-in-out infinite;
+  #game-intro p {
+    color: white;
+    line-height: 160%;
   }
-  
-  @keyframes levitate 
-  {
-    0% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  } */

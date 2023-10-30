@@ -16,21 +16,15 @@ window.onload = function ()
     game.start();
   }
 
-  function handleKeydown(event) 
-  {
-    const key = event.key.toLowerCase(); // Convert the key to lowercase for consistency.
-   
-    //jumping
-    if (key === "arrowup" || key === "w") 
-    {
-      if (!game.player.isJumping) 
-      {
-        game.player.velocityY = game.player.jumpStrength;
-        game.player.isJumping = true;
-      }
-
+  function handleKeydown(event) {
+    const key = event.key.toLowerCase();
+  
+    if ((key === "arrowup" || key === "w") && !game.player.isJumping) {
+      game.player.velocityY = game.player.jumpStrength;
+      game.player.isJumping = true;
       event.preventDefault();
     }
+  
 
     const keyMappings = 
     {
@@ -66,21 +60,11 @@ window.onload = function ()
     }
   }
   
-  window.addEventListener("keydown", handleKeydown);
+  function handleKeyup(event) {
+    const key = event.key.toLowerCase();
   
-  
-  function handleKeyup(event) 
-  {
-    const key = event.key.toLowerCase(); // Convert the key to lowercase for consistency.
-
-    //jumping
-    if ((key === "arrowup" || key === "w") && game.player.isJumping) 
-    {
-      // game.player.isJumping = false;
-
-      //code so that char jumps once... replace line above
-      game.player.velocityY = game.player.jumpStrength;
-      game.player.isJumping = true;
+    if (key === "arrowup" || key === "w") {
+      // Do nothing when releasing the jump key to prevent double jumps.
     }
 
     const keyMappings = 
@@ -95,12 +79,10 @@ window.onload = function ()
       "s": "down",
     };
 
-    if (keyMappings[key]) 
-    {
+    if (keyMappings[key]) {
       event.preventDefault();
-
-      switch (keyMappings[key]) 
-      {
+  
+      switch (keyMappings[key]) {
         case "left":
           game.player.directionX = 0;
           break;
@@ -116,8 +98,8 @@ window.onload = function ()
       }
     }
   }
-
-window.addEventListener("keyup", handleKeyup);
+  window.addEventListener("keydown", handleKeydown);
+  window.addEventListener("keyup", handleKeyup);
 };
 
   
