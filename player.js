@@ -1,7 +1,5 @@
-class Player 
-{
-  constructor(gameScreen, left, top, width, height, imgSrc) 
-  {
+class Player {
+  constructor(gameScreen, left, top, width, height, imgSrc) {
     this.left = left;
     this.top = top;
     this.width = width;
@@ -26,9 +24,14 @@ class Player
     this.isJumping = false;
   }
 
+  handlePlatformCollision(platform) {
+    this.top = platform.top - this.height;
+    this.velocityY = 0;
+    this.isJumping = false;
+  }
+
   // standing on a platform
-  isCollidingWith(platform) 
-  {
+  isCollidingWith(platform) {
     const playerLeft = this.left;
     const playerRight = this.left + this.width;
     const playerTop = this.top;
@@ -43,48 +46,42 @@ class Player
       playerRight > platformLeft &&
       playerLeft < platformRight &&
       playerBottom > platformTop &&
-      playerTop < platformBottom
+      playerTop < platformBottom &&
+      playerTop < platformTop // New condition to check that player's top doesn't collide with platform
     );
   }
-
-  checkCollectItem(collectibleItem) 
-  {
-    const playerLeft = this.left;
-    const playerRight = this.left + this.width;
-    const playerTop = this.top;
-    const playerBottom = this.top + this.height;
+  // collect item
+  // playerHasCollectedItem() {
+  //   const playerLeft = this.left;
+  //   const playerRight = this.left + this.width;
+  //   const playerTop = this.top;
+  //   const playerBottom = this.top + this.height;
   
-    const itemLeft = collectibleItem.left;
-    const itemRight = collectibleItem.left + collectibleItem.width;
-    const itemTop = collectibleItem.top;
-    const itemBottom = collectibleItem.top + collectibleItem.height;
+  //   const itemLeft = this.collectibleItem.left;
+  //   const itemRight = this.collectibleItem.left + this.collectibleItem.width;
+  //   const itemTop = this.collectibleItem.top;
+  //   const itemBottom = this.collectibleItem.top + this.collectibleItem.height;
   
-    if (
-      playerRight > itemLeft &&
-      playerLeft < itemRight &&
-      playerBottom > itemTop &&
-      playerTop < itemBottom
-    ) {
-      // Player collected the item, implement the win logic here
-    }
-  }
+  //   // Check for collision between player and collectible item
+  //   if (
+  //     playerRight > itemLeft &&
+  //     playerLeft < itemRight &&
+  //     playerBottom > itemTop &&
+  //     playerTop < itemBottom
+  //   ) {
+  //     return true; // The item is collected
+  //   } else {
+  //     return false; // The item is not collected
+  //   }
+  // }
 
-  handlePlatformCollision(platform) 
-  {
-    this.top = platform.top - this.height;
-    this.velocityY = 0;
-    this.isJumping = false;
-  }
-
-  move() 
-  {
+  move() {
     this.velocityY += this.gravity; //jump part
     this.top += this.velocityY;
 
     // if (this.top > this.gameScreen.offsetHeight) {
     //   this.top = this.gameScreen.offsetHeight - this.height;
-    if (this.top > this.gameScreen.offsetHeight - this.height) 
-    {
+    if (this.top > this.gameScreen.offsetHeight - this.height) {
       this.top = this.gameScreen.offsetHeight - this.height;
       this.velocityY = 0;
       this.isJumping = false;
@@ -93,23 +90,20 @@ class Player
     this.left += this.directionX;
     this.top += this.directionY;
 
-    if (this.directionX < 0) 
-    {
+    if (this.directionX < 0) {// spookie facing left or right
       this.imageSrc = "./images/player-left.png"; // left-facing image source
-    } else if (this.directionX > 0) 
-    {
+    } else if (this.directionX > 0) {
       this.imageSrc = "./images/player-right.png"; // right-facing image source
     }
 
-    this.left = Math.max(10, Math.min(this.gameScreen.offsetWidth - this.width - 10, this.left));
+    this.left = Math.max(20, Math.min(this.gameScreen.offsetWidth - this.width - 20, this.left));
     // this.top = Math.max(10, Math.min(this.gameScreen.offsetHeight - this.height - 10, this.top)); //for border at the top
-    this.top = Math.min(this.gameScreen.offsetHeight - this.height - 10, this.top);
+    this.top = Math.min(this.gameScreen.offsetHeight - this.height - 20, this.top);
 
     this.updatePosition();
   }
 
-  updatePosition() 
-  {
+  updatePosition() {
     this.element.src = this.imageSrc;
     this.element.style.left = `${this.left}px`;
     this.element.style.top = `${this.top}px`;
@@ -120,7 +114,6 @@ class Player
 // move function with jump images (was putting default image player-right)
 // move()
 //   {
-//     //jump part
 //     this.velocityY += this.gravity;
 //     this.top += this.velocityY;
 
@@ -129,11 +122,6 @@ class Player
 //       this.velocityY = 0;
 //       this.isJumping = false;
 //     }
-
-
-//     //added to change levels
-//     // this.element.style.left = `${this.posX}px`;
-//     // this.element.style.top = `${this.posY}px`;
 
 //     let jumpImageSrc = "./images/player-right.png"; // Default jump image source
 
@@ -156,8 +144,6 @@ class Player
 //     }
 //     this.left += this.directionX;
 //     this.top += this.directionY;
-
-//     // ... (rest of your code)
 
 //     this.updatePosition();
 //      }

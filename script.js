@@ -1,51 +1,40 @@
-window.onload = function () 
-{
+window.onload = function () {
   const startButton = document.getElementById("start-button");
   const restartButton = document.getElementById("restart-button");
   const backgroundMusic = document.getElementById("background-music");
   const game = new Game();
 
-  startButton.addEventListener("click", function () 
-  {
+  startButton.addEventListener("click", function () {
     startGame();
     backgroundMusic.play(); 
   });
 
-  function startGame() 
-  {
-    game.start();
+  function startGame() {
+    game.start(); 
   }
 
-  function handleKeydown(event) 
-  {
+  function handleKeydown(event) {
     const key = event.key.toLowerCase();
   
-    if ((key === "arrowup" || key === "w") && !game.player.isJumping) 
-    {
+    if ((key === "arrowup" || key === "w") && !game.player.isJumping) {
       game.player.velocityY = game.player.jumpStrength;
       game.player.isJumping = true;
       event.preventDefault();
     }
   
-
-    const keyMappings = 
-    {
+    const keyMappings = {
       "arrowleft": "left",
       "a": "left",
       "arrowup": "up",
       "w": "up",
       "arrowright": "right",
       "d": "right",
-      "arrowdown": "down",
-      "s": "down",
     };
   
-    if (keyMappings[key]) 
-    {
+    if (keyMappings[key]) {
       event.preventDefault();
   
-      switch (keyMappings[key]) 
-      {
+      switch (keyMappings[key]) {
         case "left":
           game.player.directionX = -4;
           break;
@@ -55,32 +44,24 @@ window.onload = function ()
         case "right":
           game.player.directionX = 4;
           break;
-        case "down":
-          game.player.directionY = 4;
-          break;
       }
     }
   }
   
-  function handleKeyup(event) 
-  {
+  function handleKeyup(event) {
     const key = event.key.toLowerCase();
   
-    if (key === "arrowup" || key === "w") 
-    {
+    if (key === "arrowup" || key === "w") {
       // do nothing when releasing the jump key to prevent double jumps.
     }
 
-    const keyMappings = 
-    {
+    const keyMappings = {
       "arrowleft": "left",
       "a": "left",
       "arrowup": "up",
       "w": "up",
       "arrowright": "right",
       "d": "right",
-      "arrowdown": "down",
-      "s": "down",
     };
 
     if (keyMappings[key]) {
@@ -96,14 +77,19 @@ window.onload = function ()
         case "right":
           game.player.directionX = 0;
           break;
-        case "down":
-          game.player.directionY = 0;
-          break;
       }
     }
   }
   window.addEventListener("keydown", handleKeydown);
   window.addEventListener("keyup", handleKeyup);
+
+  restartButton.addEventListener("click", function () { // game restart
+    restartGame();
+  });
+
+  function restartGame() {
+    location.reload();
+  }
 };
 
   

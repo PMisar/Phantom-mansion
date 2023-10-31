@@ -45,9 +45,9 @@ body
 
 #game-container 
 {
-    display: flex;
-    padding: 20px 0px;
-    justify-content: center;
+  display: flex;
+  padding: 20px 0px;
+  justify-content: center;
 }
 
 #game-screen 
@@ -65,19 +65,44 @@ body
 
 #game-screen h2 
 {
-    margin: 0% 5%;
-    font-size: 50px;
+  margin: 0% 5%;
+  font-size: 50px;
 }
 
 .platform 
 {
-    background-image: url("./images/platform.png");
-    background-size: 100% 100%; /* adjust to fit the platform size */
-
+  background-image: url("./images/platform.png");
+  background-size: 100% 100%; /* adjust to fit the platform size */
 }
 
 #game-intro p 
 {
-    color: white;
-    line-height: 46px;
+  color: white;
+  line-height: 46px;
+}
+
+#game-end 
+{
+  display: none;
+  font-size: 40px;
+  align-items: center;
+}
+
+#restart-button 
+{
+  font-family: 'Creepster';font-size: 35px;
+  background-color: #B9823B;
+  border-radius: 10%;
+  padding: 20px;
+  cursor: grab;
+  display: inline-block;
+  cursor: pointer;
+  border: 2px solid #B9823B;
+  color: #fff;
+}
+
+#restart-button:hover
+{
+  background: 0 0;
+  color: #B9823B;
 }
