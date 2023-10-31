@@ -1,5 +1,7 @@
-class Player {
-  constructor(gameScreen, left, top, width, height, imgSrc) {
+class Player 
+{
+  constructor(gameScreen, left, top, width, height, imgSrc) 
+  {
     this.left = left;
     this.top = top;
     this.width = width;
@@ -25,7 +27,8 @@ class Player {
   }
 
   // standing on a platform
-  isCollidingWith(platform) {
+  isCollidingWith(platform) 
+  {
     const playerLeft = this.left;
     const playerRight = this.left + this.width;
     const playerTop = this.top;
@@ -44,18 +47,44 @@ class Player {
     );
   }
 
-  handlePlatformCollision(platform) {
+  checkCollectItem(collectibleItem) 
+  {
+    const playerLeft = this.left;
+    const playerRight = this.left + this.width;
+    const playerTop = this.top;
+    const playerBottom = this.top + this.height;
+  
+    const itemLeft = collectibleItem.left;
+    const itemRight = collectibleItem.left + collectibleItem.width;
+    const itemTop = collectibleItem.top;
+    const itemBottom = collectibleItem.top + collectibleItem.height;
+  
+    if (
+      playerRight > itemLeft &&
+      playerLeft < itemRight &&
+      playerBottom > itemTop &&
+      playerTop < itemBottom
+    ) {
+      // Player collected the item, implement the win logic here
+    }
+  }
+
+  handlePlatformCollision(platform) 
+  {
     this.top = platform.top - this.height;
     this.velocityY = 0;
     this.isJumping = false;
   }
 
-  move() {
-    //jump part
-    this.velocityY += this.gravity;
+  move() 
+  {
+    this.velocityY += this.gravity; //jump part
     this.top += this.velocityY;
 
-    if (this.top > this.gameScreen.offsetHeight - this.height) {
+    // if (this.top > this.gameScreen.offsetHeight) {
+    //   this.top = this.gameScreen.offsetHeight - this.height;
+    if (this.top > this.gameScreen.offsetHeight - this.height) 
+    {
       this.top = this.gameScreen.offsetHeight - this.height;
       this.velocityY = 0;
       this.isJumping = false;
@@ -64,9 +93,11 @@ class Player {
     this.left += this.directionX;
     this.top += this.directionY;
 
-    if (this.directionX < 0) {
+    if (this.directionX < 0) 
+    {
       this.imageSrc = "./images/player-left.png"; // left-facing image source
-    } else if (this.directionX > 0) {
+    } else if (this.directionX > 0) 
+    {
       this.imageSrc = "./images/player-right.png"; // right-facing image source
     }
 
@@ -77,7 +108,8 @@ class Player {
     this.updatePosition();
   }
 
-  updatePosition() {
+  updatePosition() 
+  {
     this.element.src = this.imageSrc;
     this.element.style.left = `${this.left}px`;
     this.element.style.top = `${this.top}px`;

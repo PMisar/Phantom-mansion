@@ -6,28 +6,48 @@ body
   color: orange;
   text-align: center;
   /* font-family: 'The Halloween', sans-serif; */
-  font-family: 'Creepster';font-size: 35px;
+  font-family: 'Creepster';
 }
 
-#game-intro 
+#game-intro h1
 {
-  padding: 150px 0px;
+  font-family: 'The Halloween', sans-serif;
+  font-size: 40px;
+}
+
+#game-intro p
+{
+  font-size: 27px;
+}
+
+#game-intro .orange-text {
+  color: orange;
 }
 
 #start-button 
 {
-  font-family: 'Creepster';font-size: 30px;
+  font-family: 'Creepster';font-size: 35px;
   background-color: #B9823B;
   border-radius: 10%;
-  margin-top: 10px;
-  padding: 15px;
+  padding: 20px;
+  cursor: grab;
+  display: inline-block;
+  cursor: pointer;
+  border: 2px solid #B9823B;
+  color: #fff;
+}
+
+#start-button:hover
+{
+  background: 0 0;
+  color: #B9823B;
 }
 
 #game-container 
 {
-  display: flex;
-  padding: 0px 0px;
-  justify-content: center;
+    display: flex;
+    padding: 20px 0px;
+    justify-content: center;
 }
 
 #game-screen 
@@ -43,12 +63,21 @@ body
   /* animation: slide 5s linear infinite; */
   }
 
-  .platform {
+#game-screen h2 
+{
+    margin: 0% 5%;
+    font-size: 50px;
+}
+
+.platform 
+{
     background-image: url("./images/platform.png");
     background-size: 100% 100%; /* adjust to fit the platform size */
-  }
 
-  #game-intro p {
+}
+
+#game-intro p 
+{
     color: white;
-    line-height: 160%;
-  }
+    line-height: 46px;
+}

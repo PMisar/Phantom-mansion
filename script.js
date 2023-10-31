@@ -16,10 +16,12 @@ window.onload = function ()
     game.start();
   }
 
-  function handleKeydown(event) {
+  function handleKeydown(event) 
+  {
     const key = event.key.toLowerCase();
   
-    if ((key === "arrowup" || key === "w") && !game.player.isJumping) {
+    if ((key === "arrowup" || key === "w") && !game.player.isJumping) 
+    {
       game.player.velocityY = game.player.jumpStrength;
       game.player.isJumping = true;
       event.preventDefault();
@@ -60,11 +62,13 @@ window.onload = function ()
     }
   }
   
-  function handleKeyup(event) {
+  function handleKeyup(event) 
+  {
     const key = event.key.toLowerCase();
   
-    if (key === "arrowup" || key === "w") {
-      // Do nothing when releasing the jump key to prevent double jumps.
+    if (key === "arrowup" || key === "w") 
+    {
+      // do nothing when releasing the jump key to prevent double jumps.
     }
 
     const keyMappings = 
