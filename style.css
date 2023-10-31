@@ -1,22 +1,19 @@
-body 
-{
+body {
   margin: 0;
   padding: 5%;
   background-color: black;
   color: orange;
   text-align: center;
   /* font-family: 'The Halloween', sans-serif; */
-  font-family: 'Creepster';
+  font-family: "Creepster";
 }
 
-#game-intro h1
-{
-  font-family: 'The Halloween', sans-serif;
+#game-intro h1 {
+  font-family: "The Halloween", sans-serif;
   font-size: 40px;
 }
 
-#game-intro p
-{
+#game-intro p {
   font-size: 27px;
 }
 
@@ -24,34 +21,31 @@ body
   color: orange;
 }
 
-#start-button 
-{
-  font-family: 'Creepster';font-size: 35px;
-  background-color: #B9823B;
+#start-button {
+  font-family: "Creepster";
+  font-size: 35px;
+  background-color: #b9823b;
   border-radius: 10%;
   padding: 20px;
   cursor: grab;
   display: inline-block;
   cursor: pointer;
-  border: 2px solid #B9823B;
+  border: 2px solid #b9823b;
   color: #fff;
 }
 
-#start-button:hover
-{
+#start-button:hover {
   background: 0 0;
-  color: #B9823B;
+  color: #b9823b;
 }
 
-#game-container 
-{
+#game-container {
   display: flex;
   padding: 20px 0px;
   justify-content: center;
 }
 
-#game-screen 
-{
+#game-screen {
   text-align: left;
   display: none;
   align-content: center;
@@ -61,48 +55,43 @@ body
   background-image: url(./images/level0.png);
   background-size: cover;
   /* animation: slide 5s linear infinite; */
-  }
+}
 
-#game-screen h2 
-{
+#game-screen h2 {
   margin: 0% 5%;
   font-size: 50px;
 }
 
-.platform 
-{
+.platform {
   background-image: url("./images/platform.png");
   background-size: 100% 100%; /* adjust to fit the platform size */
 }
 
-#game-intro p 
-{
+#game-intro p {
   color: white;
   line-height: 46px;
 }
 
-#game-end 
-{
+#game-end,
+#game-end2 {
   display: none;
   font-size: 40px;
-  align-items: center;
 }
 
-#restart-button 
-{
-  font-family: 'Creepster';font-size: 35px;
-  background-color: #B9823B;
+#restart-button {
+  font-family: "Creepster";
+  font-size: 35px;
+  background-color: #b9823b;
   border-radius: 10%;
   padding: 20px;
   cursor: grab;
   display: inline-block;
   cursor: pointer;
-  border: 2px solid #B9823B;
+  border: 2px solid #b9823b;
   color: #fff;
 }
 
-#restart-button:hover
-{
+#restart-button:hover {
   background: 0 0;
-  color: #B9823B;
+  color: #b9823b;
 }

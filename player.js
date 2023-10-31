@@ -30,38 +30,19 @@ class Player {
     this.isJumping = false;
   }
 
-  // standing on a platform
-  isCollidingWith(platform) {
-    const playerLeft = this.left;
-    const playerRight = this.left + this.width;
-    const playerTop = this.top;
-    const playerBottom = this.top + this.height;
 
-    const platformLeft = platform.left;
-    const platformRight = platform.left + platform.width;
-    const platformTop = platform.top;
-    const platformBottom = platform.top + platform.height;
-
-    return (
-      playerRight > platformLeft &&
-      playerLeft < platformRight &&
-      playerBottom > platformTop &&
-      playerTop < platformBottom &&
-      playerTop < platformTop // New condition to check that player's top doesn't collide with platform
-    );
-  }
   // collect item
   // playerHasCollectedItem() {
   //   const playerLeft = this.left;
   //   const playerRight = this.left + this.width;
   //   const playerTop = this.top;
   //   const playerBottom = this.top + this.height;
-  
+
   //   const itemLeft = this.collectibleItem.left;
   //   const itemRight = this.collectibleItem.left + this.collectibleItem.width;
   //   const itemTop = this.collectibleItem.top;
   //   const itemBottom = this.collectibleItem.top + this.collectibleItem.height;
-  
+
   //   // Check for collision between player and collectible item
   //   if (
   //     playerRight > itemLeft &&
@@ -107,6 +88,27 @@ class Player {
     this.element.src = this.imageSrc;
     this.element.style.left = `${this.left}px`;
     this.element.style.top = `${this.top}px`;
+  }
+
+  // interaction with platforms
+  isCollidingWith(platform) {
+    const playerLeft = this.left;
+    const playerRight = this.left + this.width;
+    const playerTop = this.top;
+    const playerBottom = this.top + this.height;
+
+    const platformLeft = platform.left;
+    const platformRight = platform.left + platform.width;
+    const platformTop = platform.top;
+    const platformBottom = platform.top + platform.height;
+
+    return (
+      playerRight > platformLeft &&
+      playerLeft < platformRight &&
+      playerBottom > platformTop &&
+      playerTop < platformBottom &&
+      playerTop < platformTop
+    );
   }
 }
 

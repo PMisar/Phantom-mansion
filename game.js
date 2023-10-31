@@ -6,44 +6,39 @@ class Game {
     this.platforms = [];
     this.platformPositions = {
       level1: [
-        { left: 100, top: 100 },
-        { left: 300, top: 250 },
+        { left: 200, top: 150 },
+        { left: 400, top: 250 },
         { left: 500, top: 400 },
         { left: 100, top: 500 },
-        { left: 300, top: 650 },
-        { left: 500, top: 700 },
-        // Add more positions as needed for level 1
+        { left: 300, top: 550 },
+        { left: 550, top: 600 },
+        { left: 650, top: 200 },
+        { left: 800, top: 100 },
       ],
       level2: [
-        { left: 100, top: 100 },
-        { left: 300, top: 250 },
-        { left: 500, top: 400 },
-        { left: 100, top: 500 },
-        { left: 300, top: 650 },
-        { left: 500, top: 700 },
-        // Add more positions as needed for level 2
+        { left: 200, top: 550 },
+        { left: 400, top: 250 },
+        { left: 100, top: 400 },
+        { left: 400, top: 650 },
+        { left: 200, top: 100 },
+        { left: 600, top: 150 },
+        { left: 550, top: 500 },
+        { left: 650, top: 300 },
+        { left: 800, top: 400 },
+        { left: 250, top: 200 },
+
       ],
       level3: [
-        { left: 100, top: 500 },
-        { left: 300, top: 450 },
-        { left: 500, top: 400 },
-        // Add more positions as needed for level 3
+        { left: 100, top: 650 },
+        { left: 350, top: 500 },
+        { left: 800, top: 250 },
+        { left: 670, top: 570 },
+        { left: 520, top: 170 },
+        { left: 600, top: 370 },
+        { left: 500, top: 470 },
+
       ],
     };
-    // this.platformPositions = {
-    //   level1: Array.from({ length: 10 }, () => ({
-    //     left: Math.floor(Math.random() * 800),
-    //     top: Math.floor(Math.random() * 600),
-    //   })),
-    //   level2: Array.from({ length: 10 }, () => ({
-    //     left: Math.floor(Math.random() * 800),
-    //     top: Math.floor(Math.random() * 600),
-    //   })),
-    //   level3: Array.from({ length: 5 }, () => ({
-    //     left: Math.floor(Math.random() * 800),
-    //     top: Math.floor(Math.random() * 600),
-    //   })),
-    // };
     this.currentPlatform = this.platformPositions.level1;
     this.player = new Player(
       this.gameScreen,
@@ -64,7 +59,6 @@ class Game {
     this.currentLevel = 0;
     this.levelCounter = document.getElementById("level"); // to update level count
     this.initialRun = true;
-
     this.collectibleItem = null;
     this.hasCollectedItem = false;
     this.gameIsOver = false;
@@ -121,7 +115,6 @@ class Game {
       if (this.currentLevel < this.levels.length - 1) {
         // to check if there are more levels
         this.currentLevel++;
-        // this.currentPlatform = this.platformPositions.level2;
         this.removePlatforms();
         this.platforms = [];
         this.createPlatforms(this.gameScreen, this.platformPositions["level" + this.currentLevel]);
@@ -133,12 +126,12 @@ class Game {
       }
 
       if (this.currentLevel === 3 && !this.collectibleItem) {
-        // show item
+        // show item at level 3
 
         this.collectibleItem = new Collectible(
           this.gameScreen,
-          470,
-          300,
+          550,
+          30,
           50,
           140,
           "./images/sword.png"
@@ -146,7 +139,6 @@ class Game {
       }
     }
     if (this.gameIsOver) {
-      // death scenario
       this.endGame();
     }
   }
@@ -161,3 +153,18 @@ class Game {
     this.gameEndScreen.style.display = "block";
   }
 }
+
+// this.platformPositions = {
+//   level1: Array.from({ length: 10 }, () => ({
+//     left: Math.floor(Math.random() * 800),
+//     top: Math.floor(Math.random() * 600),
+//   })),
+//   level2: Array.from({ length: 10 }, () => ({
+//     left: Math.floor(Math.random() * 800),
+//     top: Math.floor(Math.random() * 600),
+//   })),
+//   level3: Array.from({ length: 5 }, () => ({
+//     left: Math.floor(Math.random() * 800),
+//     top: Math.floor(Math.random() * 600),
+//   })),
+// };
