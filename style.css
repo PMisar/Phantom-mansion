@@ -64,7 +64,6 @@ body {
 
 .platform {
   background-image: url("./images/platform.png");
-  background-size: 100% 100%; /* adjust to fit the platform size */
 }
 
 #game-intro p {
@@ -72,13 +71,17 @@ body {
   line-height: 46px;
 }
 
-#game-end,
+#game-end {
+  display: none;
+  font-size: 40px;
+}
+
 #game-end2 {
   display: none;
   font-size: 40px;
 }
 
-#restart-button {
+#restart-button, #restart-button2 {
   font-family: "Creepster";
   font-size: 35px;
   background-color: #b9823b;
@@ -91,7 +94,7 @@ body {
   color: #fff;
 }
 
-#restart-button:hover {
+#restart-button, #restart-button2:hover {
   background: 0 0;
   color: #b9823b;
 }

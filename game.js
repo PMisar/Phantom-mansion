@@ -3,6 +3,8 @@ class Game {
     this.startScreen = document.querySelector("#game-intro");
     this.gameScreen = document.querySelector("#game-screen");
     this.gameEndScreen = document.querySelector("#game-end");
+    this.gameEndScreen2 = document.querySelector("#game-end2");
+
     this.platforms = [];
     this.platformPositions = {
       level1: [
@@ -43,13 +45,17 @@ class Game {
     this.player = new Player(
       this.gameScreen,
       420,
-      580,
-      70,
-      100,
+      600,
+      60,
+      90,
       "./images/player-right.png"
     );
     this.height = 700;
     this.width = 1000;
+    // this.fallThreshold = this.height / 2;
+    // this.timerDuration = 30; // seconds
+    this.remainingTime = this.timerDuration;
+
     this.levels = [
       "./images/level0.png",
       "./images/level1.png",
@@ -67,7 +73,7 @@ class Game {
 
   createPlatforms(gameScreen, platformPositions) {
     platformPositions.forEach((position) => {
-      this.platforms.push(new Platform(gameScreen, position.left, position.top, 100, 25));
+      this.platforms.push(new Platform(gameScreen, position.left, position.top, 100, 20));
     });
     return this.platforms;
   }
@@ -100,12 +106,35 @@ class Game {
   update() {
     this.player.move();
 
+    // this.remainingTime -= 1 / 60; // 60 FPS game loop
+
+    if (!this.hasCollectedItem && this.currentLevel === 3) {
+      if (this.player.isCollidingWith(this.collectibleItem)) {
+        this.hasCollectedItem = true;
+        this.showWinScreen();
+      }
+    }
+    // if (this.remainingTime <= 0) {
+    //   this.gameIsOver = true;
+    //   this.endGame();
+    //   return;
+    // }
+    // if (this.player.top > this.fallThreshold) {
+    //   this.gameIsOver = true;
+    //   this.endGame();
+    //   return;
+    // }
+
     for (const platform of this.platforms) {
       // standing on a platform
       if (this.player.isCollidingWith(platform)) {
         this.player.handlePlatformCollision(platform);
       }
+      // else if (this.player.isCollidingTop(platform)){
+      //   this.player.handlePlatformCollision(platform);
+      // }
     }
+
     if (this.player.top + this.player.height <= 0) {
       if (this.player.top > this.height / 2) {
         //death scenario
@@ -138,20 +167,57 @@ class Game {
         );
       }
     }
-    if (this.gameIsOver) {
-      this.endGame();
-    }
   }
 
   updateLevelCounter() {
     this.levelCounter.textContent = this.currentLevel; // updates the level counter text
   }
+  ˇ
+  showWinScreen() {
+    this.gameIsOver = true;
+    this.gameScreen.style.display = "none";
+    const gameEndScreen2 = document.querySelector("#game-end2");
+    gameEndScreen2.style.display = "block";
+
+    // Hide the death screen
+    this.gameEndScreen.style.display = "none";
+  }
+
   endGame() {
     this.player.element.remove();
     this.gameIsOver = true;
-    this.gameScreen.style.display = "none";
-    this.gameEndScreen.style.display = "block";
+
+    // Display the death screen only if the player didn't collect the sword (gameIsOver is not due to collecting the sword)
+    if (!this.hasCollectedItem) {
+      this.gameScreen.style.display = "none";
+      this.gameEndScreen.style.display = "block";
+
+      // if (this.player.top > this.fallThreshold) {
+      //   // Display the game-end screen (player fell)
+      //   this.gameScreen.style.display = "none";
+      //   this.gameEndScreen.style.display = "block";
+
+      //   // Hide game-end screen2 (player didn't collect the item)
+      //   const gameEndScreen2 = document.querySelector("#game-end2");
+      //   gameEndScreen2.style.display = "none";
+      // }
+    }
+
   }
+  showWinScreen() {
+    this.gameIsOver = true;
+    this.player.element.remove();
+    this.gameScreen.style.display = "none";
+    const gameEndScreen2 = document.querySelector("#game-end2");
+    gameEndScreen2.style.display = "block";
+  }
+
+  // endGame() {
+  //   this.player.element.remove();
+  //   this.gameIsOver = true;
+  //   this.gameScreen.style.display = "none";
+  //   this.gameEndScreen.style.display = "block";
+  // }
 }
 
 // this.platformPositions = {
