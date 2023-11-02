@@ -146,7 +146,7 @@ class Game {
         this.createPlatforms(this.gameScreen, this.platformPositions["level" + this.currentLevel]);
         this.gameScreen.style.backgroundImage = `url('${this.levels[this.currentLevel]
           }')`;
-        this.player.top = 580;
+        this.player.top = 650;
 
         this.updateLevelCounter(); // to update the level counter
       }
@@ -158,7 +158,7 @@ class Game {
           30,
           50,
           140,
-          "./images/sword.png"
+          "images/sword.png"
         );
       }
     }
