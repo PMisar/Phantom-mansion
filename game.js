@@ -158,7 +158,7 @@ class Game {
           30,
           50,
           140,
-          "images/sword.png"
+          "images/Sword.png"
         );
       }
     }
