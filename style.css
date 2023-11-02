@@ -76,10 +76,11 @@ body {
 
 #game-end2 {
   display: none;
-  font-size: 40px;  
+  font-size: 40px;
 }
 
-#restart-button, #restart-button2 {
+#restart-button,
+#restart-button2 {
   font-family: "Creepster";
   font-size: 35px;
   background-color: #b9823b;
