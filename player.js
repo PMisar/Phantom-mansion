@@ -20,11 +20,11 @@ class Player {
     //jump part
     this.velocityY = 0; // initial vertical velocity
     this.gravity = 0.3; // gravity strength
-    this.jumpStrength = -6; // initial jump velocity (negative for upward movement)
+    this.jumpStrength = -8; // initial jump velocity (negative for upward movement)
     this.isJumping = false;
   }
 
-//previous code
+  //previous code
   handlePlatformCollision(platform) {
     this.top = platform.top - this.height;
     // this.left = platform.left - this.width;
@@ -63,37 +63,59 @@ class Player {
     this.element.style.left = `${this.left}px`;
     this.element.style.top = `${this.top}px`;
   }
-// previous code
+  // previous code
   // interaction with platforms
   isCollidingWith(platform) {
-    let playerLeft = this.left;
-    let playerRight = this.left + this.width;
-    let playerTop = this.top;
-    let playerBottom = this.top + this.height;
+    const playerRect = this.element.getBoundingClientRect();
+    const obstacleRect = platform.element.getBoundingClientRect();
+    const didCollide = playerRect.left < obstacleRect.right &&
+      playerRect.right > obstacleRect.left &&
+      playerRect.top < obstacleRect.bottom &&
+      playerRect.bottom > obstacleRect.top
 
-    const platformLeft = platform.left;
-    const platformRight = platform.left + platform.width;
-    const platformTop = platform.top;
-    const platformBottom = platform.top + platform.height;
+    let previousTop = 0, previousLeft = 0;
 
-    if (
-      playerLeft < platformRight &&
-      playerRight > platformLeft &&
-      playerTop < platformBottom &&
-      playerBottom > platformTop 
-    )
-    {
-      playerTop = platformTop - this.height;
-      playerBottom = platformBottom;
-      playerLeft = platformLeft - this.width; 
-      playerRight = platformRight; 
-      return true;
-    } else {
-      return false;
+    // if (!didCollide) {
+    //   previousTop = this.top;
+    //   previousLeft = this.left;
+    // }
+
+    if (didCollide) {
+      //console.log("Collision detected!");
+
+      this.top += obstacleRect.bottom
     }
+    return didCollide;
   }
+  // isCollidingWith(platform) {
+  //   let playerLeft = this.left;
+  //   let playerRight = this.left + this.width;
+  //   let playerTop = this.top;
+  //   let playerBottom = this.top + this.height;
 
-  
+  //   const platformLeft = platform.left;
+  //   const platformRight = platform.left + platform.width;
+  //   const platformTop = platform.top;
+  //   const platformBottom = platform.top + platform.height;
+
+  //   if (
+  //     playerLeft < platformRight &&
+  //     playerRight > platformLeft &&
+  //     playerTop < platformBottom &&
+  //     playerBottom > platformTop 
+  //   )
+  //   {
+  //     playerTop = platformTop - this.height;
+  //     playerBottom = platformBottom;
+  //     playerLeft = platformLeft - this.width; 
+  //     playerRight = platformRight; 
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+
+
 
   // isCollidingTop(platform) {
   //   const playerLeft = this.left;

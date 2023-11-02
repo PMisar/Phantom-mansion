@@ -11,18 +11,18 @@ window.onload = function () {
   });
 
   function startGame() {
-    game.start(); 
+    game.start();
   }
 
   function handleKeydown(event) {
     const key = event.key.toLowerCase();
-  
+
     if ((key === "arrowup" || key === "w") && !game.player.isJumping) {
       game.player.velocityY = game.player.jumpStrength;
       game.player.isJumping = true;
       event.preventDefault();
     }
-  
+
     const keyMappings = {
       "arrowleft": "left",
       "a": "left",
@@ -31,10 +31,10 @@ window.onload = function () {
       "arrowright": "right",
       "d": "right",
     };
-  
+
     if (keyMappings[key]) {
       event.preventDefault();
-  
+
       switch (keyMappings[key]) {
         case "left":
           game.player.directionX = -4;
@@ -48,12 +48,12 @@ window.onload = function () {
       }
     }
   }
-  
+
   function handleKeyup(event) {
     const key = event.key.toLowerCase();
-  
+
     if (key === "arrowup" || key === "w") {
-      // do nothing when releasing the jump key to prevent double jumps.
+      // does nothing when releasing the jump key to prevent double jumps.
     }
 
     const keyMappings = {
@@ -67,7 +67,7 @@ window.onload = function () {
 
     if (keyMappings[key]) {
       event.preventDefault();
-  
+
       switch (keyMappings[key]) {
         case "left":
           game.player.directionX = 0;
@@ -82,37 +82,36 @@ window.onload = function () {
     }
   }
   //TEST CODE
-  const updatePlayerPosition = () => {
-    game.player.move();
-  };
+  // const updatePlayerPosition = () => {
+  //   game.player.move();
+  // };
 
-  const didCollide = () => {
-    // Implement the collision detection logic here based on your game's requirements
-    const playerRect = game.player.element.getBoundingClientRect();
-    const obstacleRect = Platform;
+  // const didCollide = () => {
+  //   const playerRect = game.player.element.getBoundingClientRect();
+  //   const obstacleRect = Platform;
 
-    return (
-      playerRect.left < obstacleRect.right &&
-      playerRect.right > obstacleRect.left &&
-      playerRect.top < obstacleRect.bottom &&
-      playerRect.bottom > obstacleRect.top
-    );
-  };
-  
-// TEST CODE
-  const handlePlatformCollision = () => {
-    if (didCollide()) {
-      console.log("Collision detected!");
-      const previousTop = game.player.top;
-      const previousLeft = game.player.left;
-      updatePlayerPosition();
+  //   return (
+  //     playerRect.left < obstacleRect.right &&
+  //     playerRect.right > obstacleRect.left &&
+  //     playerRect.top < obstacleRect.bottom &&
+  //     playerRect.bottom > obstacleRect.top
+  //   );
+  // };
 
-      // Restore the previous position
-      game.player.top = previousTop;
-      game.player.left = previousLeft;
-      updatePlayerPosition();
-    }
-  };
+  // TEST CODE
+  // const handlePlatformCollision = () => {
+  //   if (didCollide()) {
+  //     console.log("Collision detected!");
+  //     const previousTop = game.player.top;
+  //     const previousLeft = game.player.left;
+  //     updatePlayerPosition();
+
+  //     // Restore the previous position
+  //     game.player.top = previousTop;
+  //     game.player.left = previousLeft;
+  //     updatePlayerPosition();
+  //   }
+  // };
 
 
 
@@ -136,7 +135,7 @@ window.onload = function () {
   }
 };
 
-  
+
 
 // const player = document.getElementById("player");
 // const obstacle = document.getElementById("obstacle");

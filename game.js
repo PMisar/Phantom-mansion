@@ -7,6 +7,14 @@ class Game {
 
     this.platforms = [];
     this.platformPositions = {
+      level0: [
+        { left: 500, top: 100 },
+        { left: 400, top: 250 },
+        { left: 100, top: 400 },
+        { left: 300, top: 550 },
+        { left: 650, top: 600 },
+        { left: 700, top: 250 },
+      ],
       level1: [
         { left: 200, top: 150 },
         { left: 400, top: 250 },
@@ -35,13 +43,15 @@ class Game {
         { left: 350, top: 500 },
         { left: 800, top: 250 },
         { left: 670, top: 570 },
+        { left: 300, top: 250 },
+
         { left: 520, top: 170 },
         { left: 600, top: 370 },
         { left: 500, top: 470 },
 
       ],
     };
-    this.currentPlatform = this.platformPositions.level1;
+    this.currentPlatform = this.platformPositions.level0;
     this.player = new Player(
       this.gameScreen,
       420,
@@ -108,12 +118,12 @@ class Game {
 
     // this.remainingTime -= 1 / 60; // 60 FPS game loop
 
-    if (!this.hasCollectedItem && this.currentLevel === 3) {
-      if (this.player.isCollidingWith(this.collectibleItem)) {
-        this.hasCollectedItem = true;
-        this.showWinScreen();
-      }
-    }
+    // if (!this.hasCollectedItem && this.currentLevel === 3) {
+    //   if (this.player.isCollidingWith(this.collectibleItem)) {
+    //     this.hasCollectedItem = true;
+    //     this.showWinScreen();
+    //   }
+    // }
     // if (this.remainingTime <= 0) {
     //   this.gameIsOver = true;
     //   this.endGame();
@@ -126,10 +136,11 @@ class Game {
     // }
 
     for (const platform of this.platforms) {
+      this.player.isCollidingWith(platform);
       // standing on a platform
-      if (this.player.isCollidingWith(platform)) {
-        this.player.handlePlatformCollision(platform);
-      }
+      // if (this.player.isCollidingWith(platform)) {
+      //   this.player.handlePlatformCollision(platform);
+      // }
       // else if (this.player.isCollidingTop(platform)){
       //   this.player.handlePlatformCollision(platform);
       // }
