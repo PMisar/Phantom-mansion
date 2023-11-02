@@ -5,7 +5,7 @@ class Game {
     this.gameEndScreen = document.querySelector("#game-end");
     this.gameEndScreen2 = document.querySelector("#game-end2");
 
-    this.platforms = [];
+    this.platforms = [];  // array to store platform objects
     this.platformPositions = {
       level0: [
         { left: 500, top: 100 },
@@ -27,7 +27,7 @@ class Game {
       ],
       level2: [
         { left: 200, top: 550 },
-        { left: 400, top: 250 },
+        { left: 400, top: 350 },
         { left: 100, top: 400 },
         { left: 400, top: 650 },
         { left: 200, top: 100 },
@@ -36,7 +36,6 @@ class Game {
         { left: 650, top: 300 },
         { left: 800, top: 400 },
         { left: 250, top: 200 },
-
       ],
       level3: [
         { left: 100, top: 650 },
@@ -44,26 +43,23 @@ class Game {
         { left: 800, top: 250 },
         { left: 670, top: 570 },
         { left: 300, top: 250 },
-
         { left: 520, top: 170 },
         { left: 600, top: 370 },
         { left: 500, top: 470 },
-
       ],
     };
-    this.currentPlatform = this.platformPositions.level0;
+    this.currentPlatform = this.platformPositions.level0; // initial platform positions
     this.player = new Player(
       this.gameScreen,
-      420,
-      600,
+      460,
+      650,
       60,
       90,
       "./images/player-right.png"
     );
     this.height = 700;
     this.width = 1000;
-    // this.fallThreshold = this.height / 2;
-    // this.timerDuration = 30; // seconds
+    this.timerDuration = 60; // seconds
     this.remainingTime = this.timerDuration;
 
     this.levels = [
@@ -82,6 +78,7 @@ class Game {
   }
 
   createPlatforms(gameScreen, platformPositions) {
+    // creates platform objects based on provided positions
     platformPositions.forEach((position) => {
       this.platforms.push(new Platform(gameScreen, position.left, position.top, 100, 20));
     });
@@ -89,6 +86,7 @@ class Game {
   }
 
   removePlatforms() {
+    // removes platform elements from the DOM
     document.querySelectorAll(".platform").forEach((e) => {
       e.remove()
     })
@@ -116,41 +114,29 @@ class Game {
   update() {
     this.player.move();
 
-    // this.remainingTime -= 1 / 60; // 60 FPS game loop
+    this.remainingTime -= 1 / 60; // 60 FPS game loop
 
-    // if (!this.hasCollectedItem && this.currentLevel === 3) {
-    //   if (this.player.isCollidingWith(this.collectibleItem)) {
-    //     this.hasCollectedItem = true;
-    //     this.showWinScreen();
-    //   }
-    // }
-    // if (this.remainingTime <= 0) {
-    //   this.gameIsOver = true;
-    //   this.endGame();
-    //   return;
-    // }
-    // if (this.player.top > this.fallThreshold) {
-    //   this.gameIsOver = true;
-    //   this.endGame();
-    //   return;
-    // }
-
-    for (const platform of this.platforms) {
-      this.player.isCollidingWith(platform);
-      // standing on a platform
-      // if (this.player.isCollidingWith(platform)) {
-      //   this.player.handlePlatformCollision(platform);
-      // }
-      // else if (this.player.isCollidingTop(platform)){
-      //   this.player.handlePlatformCollision(platform);
-      // }
+    if (!this.hasCollectedItem && this.currentLevel === 3) {
+      if (this.player.isCollidingWith(this.collectibleItem)) {
+        this.hasCollectedItem = true;
+        this.showWinScreen();
+      }
+    }
+    if (this.remainingTime <= 0) {
+      this.gameIsOver = true;
+      this.endGame();
+      return;
     }
 
-    if (this.player.top + this.player.height <= 0) {
-      if (this.player.top > this.height / 2) {
-        //death scenario
-        this.gameIsOver = true;
+    // detecting and interacting with platforms
+    for (const platform of this.platforms) {
+      this.player.isCollidingWith(platform);
+      if (this.player.isCollidingWith(platform)) {
+        this.player.handlePlatformCollision(platform);
       }
+    }
+
+    if (this.player.top + this.player.height <= 0) { // this code probably doesn't do anything but it didn't work when I removed it
 
       if (this.currentLevel < this.levels.length - 1) {
         // to check if there are more levels
@@ -165,9 +151,7 @@ class Game {
         this.updateLevelCounter(); // to update the level counter
       }
 
-      if (this.currentLevel === 3 && !this.collectibleItem) {
-        // show item at level 3
-
+      if (this.currentLevel === 3 && !this.collectibleItem) { // show item at level 3
         this.collectibleItem = new Collectible(
           this.gameScreen,
           550,
@@ -183,65 +167,22 @@ class Game {
   updateLevelCounter() {
     this.levelCounter.textContent = this.currentLevel; // updates the level counter text
   }
-  ˇ
+
   showWinScreen() {
     this.gameIsOver = true;
     this.gameScreen.style.display = "none";
     const gameEndScreen2 = document.querySelector("#game-end2");
     gameEndScreen2.style.display = "block";
-
-    // Hide the death screen
     this.gameEndScreen.style.display = "none";
   }
 
   endGame() {
     this.player.element.remove();
     this.gameIsOver = true;
-
-    // Display the death screen only if the player didn't collect the sword (gameIsOver is not due to collecting the sword)
+    // display the death screen only if the player didn't collect the sword (gameIsOver is not due to collecting the sword)
     if (!this.hasCollectedItem) {
       this.gameScreen.style.display = "none";
       this.gameEndScreen.style.display = "block";
-
-      // if (this.player.top > this.fallThreshold) {
-      //   // Display the game-end screen (player fell)
-      //   this.gameScreen.style.display = "none";
-      //   this.gameEndScreen.style.display = "block";
-
-      //   // Hide game-end screen2 (player didn't collect the item)
-      //   const gameEndScreen2 = document.querySelector("#game-end2");
-      //   gameEndScreen2.style.display = "none";
-      // }
     }
-
   }
-  showWinScreen() {
-    this.gameIsOver = true;
-    this.player.element.remove();
-    this.gameScreen.style.display = "none";
-    const gameEndScreen2 = document.querySelector("#game-end2");
-    gameEndScreen2.style.display = "block";
-  }
-
-  // endGame() {
-  //   this.player.element.remove();
-  //   this.gameIsOver = true;
-  //   this.gameScreen.style.display = "none";
-  //   this.gameEndScreen.style.display = "block";
-  // }
 }
-
-// this.platformPositions = {
-//   level1: Array.from({ length: 10 }, () => ({
-//     left: Math.floor(Math.random() * 800),
-//     top: Math.floor(Math.random() * 600),
-//   })),
-//   level2: Array.from({ length: 10 }, () => ({
-//     left: Math.floor(Math.random() * 800),
-//     top: Math.floor(Math.random() * 600),
-//   })),
-//   level3: Array.from({ length: 5 }, () => ({
-//     left: Math.floor(Math.random() * 800),
-//     top: Math.floor(Math.random() * 600),
-//   })),
-// };

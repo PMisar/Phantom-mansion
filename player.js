@@ -8,7 +8,7 @@ class Player {
     this.directionY = 0;
     this.gameScreen = gameScreen;
     this.imageSrc = imgSrc; // player facing left image
-    this.element = document.createElement("img");
+    this.element = document.createElement("img"); //HTML image element
     this.element.src = imgSrc;
     this.element.style.position = "absolute";
     this.element.style.width = `${width}px`;
@@ -17,25 +17,38 @@ class Player {
     this.element.style.top = `${top}px`;
     this.gameScreen.appendChild(this.element);
 
-    //jump part
+    //jump related properties
     this.velocityY = 0; // initial vertical velocity
     this.gravity = 0.3; // gravity strength
-    this.jumpStrength = -8; // initial jump velocity (negative for upward movement)
+    this.jumpStrength = -5; // initial jump velocity (negative for upward movement)
     this.isJumping = false;
   }
 
-  //previous code
   handlePlatformCollision(platform) {
     this.top = platform.top - this.height;
-    // this.left = platform.left - this.width;
 
     this.velocityY = 5;
     this.isJumping = false;
   }
 
   move() {
-    this.velocityY += this.gravity; //jump part
-    this.top += this.velocityY;
+    this.velocityY += this.gravity;  // to apply gravity
+
+    if (this.isJumping) {
+      if (this.directionX < 0) {
+        this.imageSrc = "./images/player-left-jump.png"; // jumping left image source
+      } else if (this.directionX > 0) {
+        this.imageSrc = "./images/player-right-jump.png"; // jumping right image source
+      }
+    } else {
+      if (this.directionX < 0) {
+        this.imageSrc = "./images/player-left.png"; // left-facing image source
+      } else if (this.directionX > 0) {
+        this.imageSrc = "./images/player-right.png"; // right-facing image source
+      }
+    }
+
+    this.top += this.velocityY; // update vertical position based on velocity
 
     if (this.top > this.gameScreen.offsetHeight - this.height) {
       this.top = this.gameScreen.offsetHeight - this.height;
@@ -46,13 +59,7 @@ class Player {
     this.left += this.directionX;
     this.top += this.directionY;
 
-    if (this.directionX < 0) {
-      this.imageSrc = "./images/player-left.png"; // left-facing image source
-    } else if (this.directionX > 0) {
-      this.imageSrc = "./images/player-right.png"; // right-facing image source
-    }
-
-    this.left = Math.max(20, Math.min(this.gameScreen.offsetWidth - this.width - 20, this.left));
+    this.left = Math.max(30, Math.min(this.gameScreen.offsetWidth - this.width - 30, this.left)); // game screen borders to keep the player inside
     this.top = Math.min(this.gameScreen.offsetHeight - this.height - 20, this.top);
 
     this.updatePosition();
@@ -63,99 +70,67 @@ class Player {
     this.element.style.left = `${this.left}px`;
     this.element.style.top = `${this.top}px`;
   }
-  // previous code
-  // interaction with platforms
+
   isCollidingWith(platform) {
-    const playerRect = this.element.getBoundingClientRect();
-    const obstacleRect = platform.element.getBoundingClientRect();
-    const didCollide = playerRect.left < obstacleRect.right &&
-      playerRect.right > obstacleRect.left &&
-      playerRect.top < obstacleRect.bottom &&
-      playerRect.bottom > obstacleRect.top
+  let playerLeft = this.left;
+  let playerRight = this.left + this.width;
+  let playerTop = this.top;
+  let playerBottom = this.top + this.height;
 
-    let previousTop = 0, previousLeft = 0;
+  const platformLeft = platform.left;
+  const platformRight = platform.left + platform.width;
+  const platformTop = platform.top;
+  const platformBottom = platform.top + platform.height;
 
-    // if (!didCollide) {
-    //   previousTop = this.top;
-    //   previousLeft = this.left;
-    // }
+  // check if there's a collision
+  if (
+    playerLeft < platformRight &&
+    playerRight > platformLeft &&
+    playerTop < platformBottom &&
+    playerBottom > platformTop
+  ) {
+    // calculate the overlap in each direction
+    const overlapLeft = playerRight - platformLeft;
+    const overlapRight = platformRight - playerLeft;
+    const overlapTop = playerBottom - platformTop;
+    const overlapBottom = platformBottom - playerTop;
 
-    if (didCollide) {
-      //console.log("Collision detected!");
+    // find the direction with the smallest overlap
+    const minOverlap = Math.min(
+      overlapLeft,
+      overlapRight,
+      overlapTop,
+      overlapBottom
+    );
 
-      this.top += obstacleRect.bottom
+    // Adjust the player's position based on the direction with the smallest overlap
+    if (minOverlap === overlapLeft) {
+      this.left -= overlapLeft;
+      if (this.velocityY > 0) {
+        this.velocityY = 0; // Stop vertical movement when hitting from the left
+        this.isJumping = false; // Reset jump state
+      }
+    } else if (minOverlap === overlapRight) {
+      this.left += overlapRight;
+      if (this.velocityY > 0) {
+        this.velocityY = 0; // Stop vertical movement when hitting from the right
+        this.isJumping = false; // Reset jump state
+      }
+    } else if (minOverlap === overlapTop) {
+      this.top -= overlapTop;
+      if (this.velocityY > 0) {
+        this.velocityY = 0; // Stop vertical movement when hitting from the top
+        this.isJumping = false; // Reset jump state
+      }
+    } else if (minOverlap === overlapBottom) {
+      this.top += overlapBottom;
+      if (this.velocityY > 0) {
+        this.velocityY = 0; // Stop vertical movement when hitting from the bottom
+        this.isJumping = false; // Reset jump state
+      }
     }
-    return didCollide;
+    return true;
   }
-  // isCollidingWith(platform) {
-  //   let playerLeft = this.left;
-  //   let playerRight = this.left + this.width;
-  //   let playerTop = this.top;
-  //   let playerBottom = this.top + this.height;
-
-  //   const platformLeft = platform.left;
-  //   const platformRight = platform.left + platform.width;
-  //   const platformTop = platform.top;
-  //   const platformBottom = platform.top + platform.height;
-
-  //   if (
-  //     playerLeft < platformRight &&
-  //     playerRight > platformLeft &&
-  //     playerTop < platformBottom &&
-  //     playerBottom > platformTop 
-  //   )
-  //   {
-  //     playerTop = platformTop - this.height;
-  //     playerBottom = platformBottom;
-  //     playerLeft = platformLeft - this.width; 
-  //     playerRight = platformRight; 
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-
-
-
-  // isCollidingTop(platform) {
-  //   const playerLeft = this.left;
-  //   const playerRight = this.left + this.width;
-  //   const playerTop = this.top;
-  //   const playerBottom = this.top + this.height;
-
-  //   const platformLeft = platform.left;
-  //   const platformRight = platform.left + platform.width;
-  //   const platformTop = platform.top;
-  //   const platformBottom = platform.top + platform.height;
-
-  //   return (
-  //     playerRight > platformLeft &&
-  //   playerLeft < platformRight &&
-  //   playerTop < platformBottom && // Adjusted this line
-  //   playerBottom > platformTop && // Adjusted this line
-  //   playerTop < platformTop
-  // );
-  // }
+  return false;
+ }
 }
-
-// move function with jump images (was putting default image player-right)
-
-//     let jumpImageSrc = "./images/player-right.png"; // Default jump image source
-
-//     if (this.directionX < 0) {
-//         jumpImageSrc = "./images/player-left-jump.png"; // Jumping left image source
-//     } else if (this.directionX > 0) {
-//         jumpImageSrc = "./images/player-right-jump.png"; // Jumping right image source
-//     }
-
-//     if (this.isJumping) {
-//         // Set the image source to the jumping image
-//         this.imageSrc = jumpImageSrc;
-//     } else {
-//         // Handle left and right movement images
-//         if (this.directionX < 0) {
-//             this.imageSrc = "./images/player-left.png"; // left-facing image source
-//         } else if (this.directionX > 0) {
-//             this.imageSrc = "./images/player-right.png"; // right-facing image source
-//         }
-//     }
