@@ -4,7 +4,6 @@ body {
   background-color: black;
   color: orange;
   text-align: center;
-  /* font-family: 'The Halloween', sans-serif; */
   font-family: "Creepster";
 }
 
@@ -54,7 +53,6 @@ body {
   position: relative;
   background-image: url(./images/level0.png);
   background-size: cover;
-  /* animation: slide 5s linear infinite; */
 }
 
 #game-screen h2 {
@@ -81,7 +79,8 @@ body {
   font-size: 40px;
 }
 
-#restart-button, #restart-button2 {
+#restart-button,
+#restart-button2 {
   font-family: "Creepster";
   font-size: 35px;
   background-color: #b9823b;
@@ -94,7 +93,12 @@ body {
   color: #fff;
 }
 
-#restart-button, #restart-button2:hover {
+#restart-button:hover {
+  background: 0 0;
+  color: #b9823b;
+}
+
+#restart-button2:hover {
   background: 0 0;
   color: #b9823b;
 }
