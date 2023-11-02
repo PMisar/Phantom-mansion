@@ -72,65 +72,65 @@ class Player {
   }
 
   isCollidingWith(platform) {
-  let playerLeft = this.left;
-  let playerRight = this.left + this.width;
-  let playerTop = this.top;
-  let playerBottom = this.top + this.height;
+    let playerLeft = this.left;
+    let playerRight = this.left + this.width;
+    let playerTop = this.top;
+    let playerBottom = this.top + this.height;
 
-  const platformLeft = platform.left;
-  const platformRight = platform.left + platform.width;
-  const platformTop = platform.top;
-  const platformBottom = platform.top + platform.height;
+    const platformLeft = platform.left;
+    const platformRight = platform.left + platform.width;
+    const platformTop = platform.top;
+    const platformBottom = platform.top + platform.height;
 
-  // check if there's a collision
-  if (
-    playerLeft < platformRight &&
-    playerRight > platformLeft &&
-    playerTop < platformBottom &&
-    playerBottom > platformTop
-  ) {
-    // calculate the overlap in each direction
-    const overlapLeft = playerRight - platformLeft;
-    const overlapRight = platformRight - playerLeft;
-    const overlapTop = playerBottom - platformTop;
-    const overlapBottom = platformBottom - playerTop;
+    // check if there's a collision
+    if (
+      playerLeft < platformRight &&
+      playerRight > platformLeft &&
+      playerTop < platformBottom &&
+      playerBottom > platformTop
+    ) {
+      // calculate the overlap in each direction
+      const overlapLeft = playerRight - platformLeft;
+      const overlapRight = platformRight - playerLeft;
+      const overlapTop = playerBottom - platformTop;
+      const overlapBottom = platformBottom - playerTop;
 
-    // find the direction with the smallest overlap
-    const minOverlap = Math.min(
-      overlapLeft,
-      overlapRight,
-      overlapTop,
-      overlapBottom
-    );
+      // find the direction with the smallest overlap
+      const minOverlap = Math.min(
+        overlapLeft,
+        overlapRight,
+        overlapTop,
+        overlapBottom
+      );
 
-    // Adjust the player's position based on the direction with the smallest overlap
-    if (minOverlap === overlapLeft) {
-      this.left -= overlapLeft;
-      if (this.velocityY > 0) {
-        this.velocityY = 0; // Stop vertical movement when hitting from the left
-        this.isJumping = false; // Reset jump state
+      // Adjust the player's position based on the direction with the smallest overlap
+      if (minOverlap === overlapLeft) {
+        this.left -= overlapLeft;
+        if (this.velocityY > 0) {
+          this.velocityY = 0; // Stop vertical movement when hitting from the left
+          this.isJumping = false; // Reset jump state
+        }
+      } else if (minOverlap === overlapRight) {
+        this.left += overlapRight;
+        if (this.velocityY > 0) {
+          this.velocityY = 0; // Stop vertical movement when hitting from the right
+          this.isJumping = false; // Reset jump state
+        }
+      } else if (minOverlap === overlapTop) {
+        this.top -= overlapTop;
+        if (this.velocityY > 0) {
+          this.velocityY = 0; // Stop vertical movement when hitting from the top
+          this.isJumping = false; // Reset jump state
+        }
+      } else if (minOverlap === overlapBottom) {
+        this.top += overlapBottom;
+        if (this.velocityY > 0) {
+          this.velocityY = 0; // Stop vertical movement when hitting from the bottom
+          this.isJumping = false; // Reset jump state
+        }
       }
-    } else if (minOverlap === overlapRight) {
-      this.left += overlapRight;
-      if (this.velocityY > 0) {
-        this.velocityY = 0; // Stop vertical movement when hitting from the right
-        this.isJumping = false; // Reset jump state
-      }
-    } else if (minOverlap === overlapTop) {
-      this.top -= overlapTop;
-      if (this.velocityY > 0) {
-        this.velocityY = 0; // Stop vertical movement when hitting from the top
-        this.isJumping = false; // Reset jump state
-      }
-    } else if (minOverlap === overlapBottom) {
-      this.top += overlapBottom;
-      if (this.velocityY > 0) {
-        this.velocityY = 0; // Stop vertical movement when hitting from the bottom
-        this.isJumping = false; // Reset jump state
-      }
+      return true;
     }
-    return true;
+    return false;
   }
-  return false;
- }
 }
