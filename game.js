@@ -59,7 +59,7 @@ class Game {
     );
     this.height = 700;
     this.width = 1000;
-    this.timerDuration = 30; // seconds
+    this.timerDuration = 35; // seconds
     this.remainingTime = this.timerDuration;
 
     this.levels = [
@@ -107,7 +107,7 @@ class Game {
     }
     this.update();
 
-    window.requestAnimationFrame(() => this.gameLoop());
+    window.requestAnimationFrame(() => this.gameLoop()); // to request the next frame update and specify a callback function that calls 'this.gameLoop()' again.
   }
 
   update() {
@@ -128,24 +128,24 @@ class Game {
     }
 
     // detecting and interacting with platforms
-    for (const platform of this.platforms) {
-      this.player.isCollidingWith(platform);
+    for (const platform of this.platforms) {  // iterating through each platform in the platforms array.
+      this.player.isCollidingWith(platform);  // calling method to check if the player is colliding with the current platform.
       if (this.player.isCollidingWith(platform)) {
-        this.player.handlePlatformCollision(platform);
+        this.player.handlePlatformCollision(platform);  // calling the method of the player object, passing the platform as an argument.
       }
     }
 
-    if (this.player.top + this.player.height <= 0) {
+    if (this.player.top + this.player.height <= 0) { // checks if the top edge of the player (plus its height) is above the screen.
 
-      if (this.currentLevel < this.levels.length - 1) {
-        // to check if there are more levels
+      if (this.currentLevel < this.levels.length - 1) { // to check if there are more levels
         this.currentLevel++;
-        this.removePlatforms();
-        this.platforms = [];
-        this.createPlatforms(this.gameScreen, this.platformPositions["level" + this.currentLevel]);
-        this.gameScreen.style.backgroundImage = `url('${this.levels[this.currentLevel]
+        this.removePlatforms(); // calling a function to remove the existing platforms
+        this.platforms = [];  // resetin the platforms array.
+        this.createPlatforms(this.gameScreen, this.platformPositions["level" + this.currentLevel]); // creating new platforms for the next level using a function, passing the game screen element and positions for the new level.
+
+        this.gameScreen.style.backgroundImage = `url('${this.levels[this.currentLevel]  // updating the background image of the game screen to the one specified for the next level.
           }')`;
-        this.player.top = 650;
+        this.player.top = 650; // players position
 
         this.updateLevelCounter(); // to update the level counter
       }
@@ -168,11 +168,11 @@ class Game {
   }
 
   showWinScreen() {
+    this.player.element.remove();
     this.gameIsOver = true;
     this.gameScreen.style.display = "none";
     const gameEndScreen2 = document.querySelector("#game-end2");
     gameEndScreen2.style.display = "block";
-    this.gameEndScreen.style.display = "none";
   }
 
   endGame() {

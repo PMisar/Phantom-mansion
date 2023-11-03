@@ -50,7 +50,7 @@ window.onload = function () {
   }
 
   function handleKeyup(event) {  // event listener for handling keyup events
-    const key = event.key.toLowerCase();
+    const key = event.key.toLowerCase(); // method to ensure that key input is case-insensitive
 
     if (key === "arrowup" || key === "w") {  // reset the player character's image source based on the direction
       if (game.player.directionX < 0) {
