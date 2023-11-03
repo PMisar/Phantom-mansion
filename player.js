@@ -48,7 +48,7 @@ class Player {
       }
     }
 
-    this.top += this.velocityY; // update vertical position based on velocity
+    this.top += this.velocityY; // to update vertical position based on velocity
 
     if (this.top > this.gameScreen.offsetHeight - this.height) {
       this.top = this.gameScreen.offsetHeight - this.height;
@@ -82,20 +82,20 @@ class Player {
     const platformTop = platform.top;
     const platformBottom = platform.top + platform.height;
 
-    // check if there's a collision
+    // to check if there's a collision
     if (
       playerLeft < platformRight &&
       playerRight > platformLeft &&
       playerTop < platformBottom &&
       playerBottom > platformTop
     ) {
-      // calculate the overlap in each direction
+      // to calculate the overlap in each direction
       const overlapLeft = playerRight - platformLeft;
       const overlapRight = platformRight - playerLeft;
       const overlapTop = playerBottom - platformTop;
       const overlapBottom = platformBottom - playerTop;
 
-      // find the direction with the smallest overlap
+      // to find the direction with the smallest overlap
       const minOverlap = Math.min(
         overlapLeft,
         overlapRight,
@@ -103,30 +103,30 @@ class Player {
         overlapBottom
       );
 
-      // Adjust the player's position based on the direction with the smallest overlap
+      // adjusting the player's position based on the direction with the smallest overlap
       if (minOverlap === overlapLeft) {
         this.left -= overlapLeft;
         if (this.velocityY > 0) {
-          this.velocityY = 0; // Stop vertical movement when hitting from the left
-          this.isJumping = false; // Reset jump state
+          this.velocityY = 0; // to stop vertical movement when hitting from the left
+          this.isJumping = false; // reset jump state
         }
       } else if (minOverlap === overlapRight) {
         this.left += overlapRight;
         if (this.velocityY > 0) {
-          this.velocityY = 0; // Stop vertical movement when hitting from the right
-          this.isJumping = false; // Reset jump state
+          this.velocityY = 0; // to stop vertical movement when hitting from the right
+          this.isJumping = false;
         }
       } else if (minOverlap === overlapTop) {
         this.top -= overlapTop;
         if (this.velocityY > 0) {
-          this.velocityY = 0; // Stop vertical movement when hitting from the top
-          this.isJumping = false; // Reset jump state
+          this.velocityY = 0; // to stop vertical movement when hitting from the top
+          this.isJumping = false; 
         }
       } else if (minOverlap === overlapBottom) {
         this.top += overlapBottom;
         if (this.velocityY > 0) {
-          this.velocityY = 0; // Stop vertical movement when hitting from the bottom
-          this.isJumping = false; // Reset jump state
+          this.velocityY = 0; // to stop vertical movement when hitting from the bottom
+          this.isJumping = false; 
         }
       }
       return true;

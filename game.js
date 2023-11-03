@@ -59,7 +59,7 @@ class Game {
     );
     this.height = 700;
     this.width = 1000;
-    this.timerDuration = 60; // seconds
+    this.timerDuration = 30; // seconds
     this.remainingTime = this.timerDuration;
 
     this.levels = [
@@ -70,7 +70,6 @@ class Game {
     ]; // 4 level images
     this.currentLevel = 0;
     this.levelCounter = document.getElementById("level"); // to update level count
-    this.initialRun = true;
     this.collectibleItem = null;
     this.hasCollectedItem = false;
     this.gameIsOver = false;
@@ -136,7 +135,7 @@ class Game {
       }
     }
 
-    if (this.player.top + this.player.height <= 0) { // this code probably doesn't do anything but it didn't work when I removed it
+    if (this.player.top + this.player.height <= 0) {
 
       if (this.currentLevel < this.levels.length - 1) {
         // to check if there are more levels
@@ -179,7 +178,6 @@ class Game {
   endGame() {
     this.player.element.remove();
     this.gameIsOver = true;
-    // display the death screen only if the player didn't collect the sword (gameIsOver is not due to collecting the sword)
     if (!this.hasCollectedItem) {
       this.gameScreen.style.display = "none";
       this.gameEndScreen.style.display = "block";
