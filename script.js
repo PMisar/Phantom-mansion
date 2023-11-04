@@ -17,7 +17,7 @@ window.onload = function () {
   function handleKeydown(event) { // event listener for handling keydown events
     const key = event.key.toLowerCase();
 
-    if ((key === "arrowup" || key === "w") && !game.player.isJumping) {
+    if ((key === "arrowup" || key === "w") && !game.player.isJumping) { 
       game.player.velocityY = game.player.jumpStrength;
       game.player.isJumping = true;
       event.preventDefault();
@@ -49,16 +49,16 @@ window.onload = function () {
     }
   }
 
-  function handleKeyup(event) {  // event listener for handling keyup events
-    const key = event.key.toLowerCase(); // method to ensure that key input is case-insensitive
+  function handleKeyup(event) {  // event listener for handling keyup events.
+    const key = event.key.toLowerCase(); // method to ensure that key input is case-insensitive.
 
-    if (key === "arrowup" || key === "w") {  // reset the player character's image source based on the direction
+    // if (key === "arrowup" || key === "w") {  // doesn't do anything.
       if (game.player.directionX < 0) {
         game.player.imageSrc = "./images/player-left.png";
       } else if (game.player.directionX > 0) {
         game.player.imageSrc = "./images/player-right.png";
       }
-    }
+    // }
 
     const keyMappings = {
       "arrowleft": "left",
@@ -100,4 +100,4 @@ window.onload = function () {
   function restartGame() {
     location.reload();
   }
-};
+}

@@ -59,8 +59,8 @@ class Game {
     );
     this.height = 700;
     this.width = 1000;
-    this.timerDuration = 35; // seconds
-    this.remainingTime = this.timerDuration;
+    // this.timerDuration = 35; // seconds
+    // this.remainingTime = this.timerDuration;
 
     this.levels = [
       "./images/level0.png",
@@ -113,7 +113,7 @@ class Game {
   update() {
     this.player.move();
 
-    this.remainingTime -= 1 / 60; // 60 FPS game loop
+    // this.remainingTime -= 1 / 60; // 60 FPS game loop
 
     if (!this.hasCollectedItem && this.currentLevel === 3) {
       if (this.player.isCollidingWith(this.collectibleItem)) {
@@ -121,11 +121,11 @@ class Game {
         this.showWinScreen();
       }
     }
-    if (this.remainingTime <= 0) {
-      this.gameIsOver = true;
-      this.endGame();
-      return;
-    }
+    // if (this.remainingTime <= 0) {
+    //   this.gameIsOver = true;
+    //   this.endGame();
+    //   return;
+    // }
 
     // detecting and interacting with platforms
     for (const platform of this.platforms) {  // iterating through each platform in the platforms array.
@@ -140,7 +140,7 @@ class Game {
       if (this.currentLevel < this.levels.length - 1) { // to check if there are more levels
         this.currentLevel++;
         this.removePlatforms(); // calling a function to remove the existing platforms
-        this.platforms = [];  // resetin the platforms array.
+        this.platforms = [];  // reseting the platforms array.
         this.createPlatforms(this.gameScreen, this.platformPositions["level" + this.currentLevel]); // creating new platforms for the next level using a function, passing the game screen element and positions for the new level.
 
         this.gameScreen.style.backgroundImage = `url('${this.levels[this.currentLevel]  // updating the background image of the game screen to the one specified for the next level.
