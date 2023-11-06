@@ -103,20 +103,26 @@ class Game {
     this.gameLoop();
   }
 
-  gameLoop() {
+  gameLoop(timestamp) {
     if (this.gameIsOver) {
       return;
     }
-    // this.update();
-    const timestamp = performance.now(); // Use performance.now() for high-resolution timestamps
+    // test code
+    if (!this.lastTimestamp) {
+      this.lastTimestamp = timestamp;
+    }
 
     const deltaTime = (timestamp - this.lastTimestamp) / 1000; // Convert to seconds
     this.lastTimestamp = timestamp;
 
     this.update(deltaTime); // Pass deltaTime to the update method
 
-    window.requestAnimationFrame(() => this.gameLoop());
+    window.requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
   }
+  //   this.update();
+
+  //   window.requestAnimationFrame(() => this.gameLoop());
+  // }
 
   update(deltaTime) {
     this.player.move();
