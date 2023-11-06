@@ -61,6 +61,8 @@ class Game {
     this.width = 1000;
     // this.timerDuration = 35; // seconds
     // this.remainingTime = this.timerDuration;
+    this.lastTimestamp = 0;
+    this.fixedTimeStep = 1 / 60; // 60 FPS
 
     this.levels = [
       "./images/level0.png",
@@ -105,12 +107,18 @@ class Game {
     if (this.gameIsOver) {
       return;
     }
-    this.update();
+    // this.update();
+    const timestamp = performance.now(); // Use performance.now() for high-resolution timestamps
 
-    window.requestAnimationFrame(() => this.gameLoop()); // to request the next frame update and specify a callback function that calls 'this.gameLoop()' again.
+    const deltaTime = (timestamp - this.lastTimestamp) / 1000; // Convert to seconds
+    this.lastTimestamp = timestamp;
+
+    this.update(deltaTime); // Pass deltaTime to the update method
+
+    window.requestAnimationFrame(() => this.gameLoop());
   }
 
-  update() {
+  update(deltaTime) {
     this.player.move();
 
     // this.remainingTime -= 1 / 60; // 60 FPS game loop
