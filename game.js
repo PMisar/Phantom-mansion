@@ -125,7 +125,7 @@ class Game {
   // }
 
   update(deltaTime) {
-    this.player.move();
+    this.player.move(deltaTime);
 
     // this.remainingTime -= 1 / 60; // 60 FPS game loop
 
