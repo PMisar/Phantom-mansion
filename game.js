@@ -1,3 +1,4 @@
+// game.js
 class Game {
   constructor() {
     this.startScreen = document.querySelector("#game-intro");
@@ -59,8 +60,6 @@ class Game {
     );
     this.height = 700;
     this.width = 1000;
-    // this.timerDuration = 35; // seconds
-    // this.remainingTime = this.timerDuration;
     this.lastTimestamp = 0;
     this.fixedTimeStep = 1 / 60; // 60 FPS
 
@@ -127,19 +126,12 @@ class Game {
   update(deltaTime) {
     this.player.move(deltaTime);
 
-    // this.remainingTime -= 1 / 60; // 60 FPS game loop
-
     if (!this.hasCollectedItem && this.currentLevel === 3) {
       if (this.player.isCollidingWith(this.collectibleItem)) {
         this.hasCollectedItem = true;
         this.showWinScreen();
       }
     }
-    // if (this.remainingTime <= 0) {
-    //   this.gameIsOver = true;
-    //   this.endGame();
-    //   return;
-    // }
 
     // detecting and interacting with platforms
     for (const platform of this.platforms) {  // iterating through each platform in the platforms array.

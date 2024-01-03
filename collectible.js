@@ -1,3 +1,4 @@
+// collectible.js
 class Collectible {
     constructor(gameScreen, left, top, width, height, imgSrc) {
         this.left = left;

@@ -1,3 +1,4 @@
+// player.js
 class Player {
   constructor(gameScreen, left, top, width, height, imgSrc) {
     this.left = left;
@@ -20,7 +21,7 @@ class Player {
     //jump related properties
     this.velocityY = 0; // initial vertical velocity
     this.gravity = 0.3; // gravity strength
-    this.jumpStrength = -5; // initial jump velocity (negative for upward movement)
+    this.jumpStrength = -8; // initial jump velocity (negative for upward movement)
     this.isJumping = false;
   }
 
@@ -30,6 +31,22 @@ class Player {
     this.velocityY = 5;
     this.isJumping = false;
   }
+  // TEST CODE
+  decelerateX(direction) {
+    const deceleration = 0.2;
+    const oppositeDirection = (direction === "left") ? "right" : "left";
+
+    if (this.directionX !== 0 && this.directionX !== this.getDirectionMultiplier(direction)) {
+      this.directionX -= deceleration * this.getDirectionMultiplier(oppositeDirection);
+    } else {
+      this.directionX = 0;
+    }
+  }
+
+  getDirectionMultiplier(direction) {
+    return (direction === "left") ? -1 : 1;
+  }
+  // TEST CODE END
 
   move() {
     this.velocityY += this.gravity;  // to apply gravity
@@ -60,7 +77,7 @@ class Player {
     this.top += this.directionY;
     // game screen borders
     this.left = Math.max(30, Math.min(this.gameScreen.offsetWidth - this.width - 30, this.left)); // game screen borders to keep the player inside
-    this.top = Math.min(this.gameScreen.offsetHeight - this.height - 20, this.top);
+    this.top = Math.min(this.gameScreen.offsetHeight - this.height - 27, this.top);
 
     this.updatePosition();
   }
@@ -120,13 +137,13 @@ class Player {
         this.top -= overlapTop;
         if (this.velocityY > 0) {
           this.velocityY = 0; // to stop vertical movement when hitting from the top
-          this.isJumping = false; 
+          this.isJumping = false;
         }
       } else if (minOverlap === overlapBottom) {
         this.top += overlapBottom;
         if (this.velocityY > 0) {
           this.velocityY = 0; // to stop vertical movement when hitting from the bottom
-          this.isJumping = false; 
+          this.isJumping = false;
         }
       }
       return true;

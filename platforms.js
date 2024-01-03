@@ -1,3 +1,4 @@
+// platform.js
 class Platform {
   constructor(gameScreen, left, top, width, height) {
     this.left = left;
