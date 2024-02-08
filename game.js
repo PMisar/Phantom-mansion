@@ -39,6 +39,90 @@ class Game {
         { left: 250, top: 200 },
       ],
       level3: [
+        { left: 200, top: 550 },
+        { left: 400, top: 350 },
+        { left: 100, top: 400 },
+        { left: 400, top: 650 },
+        { left: 200, top: 100 },
+        { left: 600, top: 150 },
+        { left: 550, top: 500 },
+        { left: 650, top: 300 },
+        { left: 800, top: 400 },
+        { left: 250, top: 200 },
+      ],
+      level4: [
+        { left: 200, top: 550 },
+        { left: 400, top: 350 },
+        { left: 100, top: 400 },
+        { left: 400, top: 650 },
+        { left: 200, top: 100 },
+        { left: 600, top: 150 },
+        { left: 550, top: 500 },
+        { left: 650, top: 300 },
+        { left: 800, top: 400 },
+        { left: 250, top: 200 },
+      ],
+      level5: [
+        { left: 200, top: 550 },
+        { left: 400, top: 350 },
+        { left: 100, top: 400 },
+        { left: 400, top: 650 },
+        { left: 200, top: 100 },
+        { left: 600, top: 150 },
+        { left: 550, top: 500 },
+        { left: 650, top: 300 },
+        { left: 800, top: 400 },
+        { left: 250, top: 200 },
+      ],
+      level6: [
+        { left: 200, top: 550 },
+        { left: 400, top: 350 },
+        { left: 100, top: 400 },
+        { left: 400, top: 650 },
+        { left: 200, top: 100 },
+        { left: 600, top: 150 },
+        { left: 550, top: 500 },
+        { left: 650, top: 300 },
+        { left: 800, top: 400 },
+        { left: 250, top: 200 },
+      ],
+      level7: [
+        { left: 200, top: 550 },
+        { left: 400, top: 350 },
+        { left: 100, top: 400 },
+        { left: 400, top: 650 },
+        { left: 200, top: 100 },
+        { left: 600, top: 150 },
+        { left: 550, top: 500 },
+        { left: 650, top: 300 },
+        { left: 800, top: 400 },
+        { left: 250, top: 200 },
+      ],
+      level8: [
+        { left: 200, top: 550 },
+        { left: 400, top: 350 },
+        { left: 100, top: 400 },
+        { left: 400, top: 650 },
+        { left: 200, top: 100 },
+        { left: 600, top: 150 },
+        { left: 550, top: 500 },
+        { left: 650, top: 300 },
+        { left: 800, top: 400 },
+        { left: 250, top: 200 },
+      ],
+      level9: [
+        { left: 200, top: 550 },
+        { left: 400, top: 350 },
+        { left: 100, top: 400 },
+        { left: 400, top: 650 },
+        { left: 200, top: 100 },
+        { left: 600, top: 150 },
+        { left: 550, top: 500 },
+        { left: 650, top: 300 },
+        { left: 800, top: 400 },
+        { left: 250, top: 200 },
+      ],
+      level10: [
         { left: 100, top: 650 },
         { left: 350, top: 500 },
         { left: 800, top: 250 },
@@ -68,6 +152,13 @@ class Game {
       "./images/level1.png",
       "./images/level2.png",
       "./images/level3.png",
+      "./images/level4.png",
+      "./images/level5.png",
+      "./images/level6.png",
+      "./images/level7.png",
+      "./images/level8.png",
+      "./images/level9.png",
+      "./images/level10.png",
     ]; // 4 level images
     this.currentLevel = 0;
     this.levelCounter = document.getElementById("level"); // to update level count
@@ -126,7 +217,7 @@ class Game {
   update(deltaTime) {
     this.player.move(deltaTime);
 
-    if (!this.hasCollectedItem && this.currentLevel === 3) {
+    if (!this.hasCollectedItem && this.currentLevel === 10) {
       if (this.player.isCollidingWith(this.collectibleItem)) {
         this.hasCollectedItem = true;
         this.showWinScreen();
@@ -156,7 +247,7 @@ class Game {
         this.updateLevelCounter(); // to update the level counter
       }
 
-      if (this.currentLevel === 3 && !this.collectibleItem) { // show item at level 3
+      if (this.currentLevel === 10 && !this.collectibleItem) { // show item at level 3
         this.collectibleItem = new Collectible(
           this.gameScreen,
           550,

@@ -77,7 +77,7 @@ class Player {
     this.top += this.directionY;
     // game screen borders
     this.left = Math.max(30, Math.min(this.gameScreen.offsetWidth - this.width - 30, this.left)); // game screen borders to keep the player inside
-    this.top = Math.min(this.gameScreen.offsetHeight - this.height - 27, this.top);
+    this.top = Math.min(this.gameScreen.offsetHeight - this.height - 20, this.top);
 
     this.updatePosition();
   }
