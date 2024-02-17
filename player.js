@@ -27,7 +27,6 @@ class Player {
 
   handlePlatformCollision(platform) {
     this.top = platform.top - this.height;
-
     this.velocityY = 5;
     this.isJumping = false;
   }
