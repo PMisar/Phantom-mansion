@@ -48,7 +48,6 @@ body {
 #game-screen {
   text-align: left;
   display: none;
-  align-content: center;
   padding: 20px 0px;
   overflow: hidden;
   position: relative;
