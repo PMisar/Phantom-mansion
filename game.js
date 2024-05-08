@@ -216,17 +216,6 @@ class Game {
 
   update(deltaTime) {
     this.player.move(deltaTime);
-
-    // Update gravity based on delta time
-    const gravityAcceleration = 9.8; // Example gravity acceleration in units per second squared
-    this.player.velocityY += gravityAcceleration * deltaTime;
-
-    // Update platform movement based on delta time
-    for (const platform of this.platforms) {
-        // Update platform position based on its velocity and delta time
-        platform.top += platform.velocityY * deltaTime;
-        // Additional platform update logic...
-    }
     // CHANGE NUMBER FOR MORE LEVELS
     if (!this.hasCollectedItem && this.currentLevel === 3) {
       if (this.player.isCollidingWith(this.collectibleItem)) {
