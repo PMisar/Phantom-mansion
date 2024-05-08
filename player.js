@@ -47,9 +47,9 @@ class Player {
   }
   // TEST CODE END
 
-  move() {
-    this.velocityY += this.gravity;  // to apply gravity
-
+  move(deltaTime) {
+    this.velocityY += this.gravity * deltaTime;  // Apply gravity based on deltaTime
+  
     if (this.isJumping) {
       if (this.directionX < 0) {
         this.imageSrc = "./images/player-left-jump.png"; // jumping left image source
@@ -63,23 +63,24 @@ class Player {
         this.imageSrc = "./images/player-right.png"; // right-facing image source
       }
     }
-
-    this.top += this.velocityY; // to update vertical position based on velocity
-
+  
+    this.top += this.velocityY * deltaTime; // Update vertical position based on velocity and deltaTime
+  
     if (this.top > this.gameScreen.offsetHeight - this.height) {
       this.top = this.gameScreen.offsetHeight - this.height;
       this.velocityY = 0;
       this.isJumping = false;
     }
-
+  
     this.left += this.directionX;
     this.top += this.directionY;
     // game screen borders
     this.left = Math.max(30, Math.min(this.gameScreen.offsetWidth - this.width - 30, this.left)); // game screen borders to keep the player inside
     this.top = Math.min(this.gameScreen.offsetHeight - this.height - 20, this.top);
-
+  
     this.updatePosition();
   }
+  
 
   updatePosition() {
     this.element.src = this.imageSrc;
