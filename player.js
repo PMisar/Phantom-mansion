@@ -9,7 +9,7 @@ class Player {
     this.directionY = 0;
     this.gameScreen = gameScreen;
     this.imageSrc = imgSrc; // player facing left image
-    this.element = document.createElement("img"); //HTML image element
+    this.element = document.createElement("img");
     this.element.src = imgSrc;
     this.element.style.position = "absolute";
     this.element.style.width = `${width}px`;
