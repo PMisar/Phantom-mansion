@@ -6,7 +6,7 @@ class Game {
     this.gameEndScreen = document.querySelector("#game-end");
     this.gameEndScreen2 = document.querySelector("#game-end2");
 
-    this.platforms = [];  // array to store platform objects
+    this.platforms = []; 
     this.platformPositions = {
       level0: [
         { left: 500, top: 100 },
@@ -38,99 +38,101 @@ class Game {
         { left: 800, top: 400 },
         { left: 250, top: 200 },
       ],
-      // level3: [
-      //   { left: 200, top: 550 },
-      //   { left: 400, top: 350 },
-      //   { left: 100, top: 400 },
-      //   { left: 400, top: 650 },
-      //   { left: 200, top: 100 },
-      //   { left: 600, top: 150 },
-      //   { left: 550, top: 500 },
-      //   { left: 650, top: 300 },
-      //   { left: 800, top: 400 },
-      //   { left: 250, top: 200 },
-      // ],
-      // level4: [
-      //   { left: 200, top: 550 },
-      //   { left: 400, top: 350 },
-      //   { left: 100, top: 400 },
-      //   { left: 400, top: 650 },
-      //   { left: 200, top: 100 },
-      //   { left: 600, top: 150 },
-      //   { left: 550, top: 500 },
-      //   { left: 650, top: 300 },
-      //   { left: 800, top: 400 },
-      //   { left: 250, top: 200 },
-      // ],
-      // level5: [
-      //   { left: 200, top: 550 },
-      //   { left: 400, top: 350 },
-      //   { left: 100, top: 400 },
-      //   { left: 400, top: 650 },
-      //   { left: 200, top: 100 },
-      //   { left: 600, top: 150 },
-      //   { left: 550, top: 500 },
-      //   { left: 650, top: 300 },
-      //   { left: 800, top: 400 },
-      //   { left: 250, top: 200 },
-      // ],
-      // level6: [
-      //   { left: 200, top: 550 },
-      //   { left: 400, top: 350 },
-      //   { left: 100, top: 400 },
-      //   { left: 400, top: 650 },
-      //   { left: 200, top: 100 },
-      //   { left: 600, top: 150 },
-      //   { left: 550, top: 500 },
-      //   { left: 650, top: 300 },
-      //   { left: 800, top: 400 },
-      //   { left: 250, top: 200 },
-      // ],
-      // level7: [
-      //   { left: 200, top: 550 },
-      //   { left: 400, top: 350 },
-      //   { left: 100, top: 400 },
-      //   { left: 400, top: 650 },
-      //   { left: 200, top: 100 },
-      //   { left: 600, top: 150 },
-      //   { left: 550, top: 500 },
-      //   { left: 650, top: 300 },
-      //   { left: 800, top: 400 },
-      //   { left: 250, top: 200 },
-      // ],
-      // level8: [
-      //   { left: 200, top: 550 },
-      //   { left: 400, top: 350 },
-      //   { left: 100, top: 400 },
-      //   { left: 400, top: 650 },
-      //   { left: 200, top: 100 },
-      //   { left: 600, top: 150 },
-      //   { left: 550, top: 500 },
-      //   { left: 650, top: 300 },
-      //   { left: 800, top: 400 },
-      //   { left: 250, top: 200 },
-      // ],
-      // level9: [
-      //   { left: 200, top: 550 },
-      //   { left: 400, top: 350 },
-      //   { left: 100, top: 400 },
-      //   { left: 400, top: 650 },
-      //   { left: 200, top: 100 },
-      //   { left: 600, top: 150 },
-      //   { left: 550, top: 500 },
-      //   { left: 650, top: 300 },
-      //   { left: 800, top: 400 },
-      //   { left: 250, top: 200 },
-      // ],
       level3: [
-        { left: 100, top: 650 },
-        { left: 350, top: 500 },
-        { left: 800, top: 250 },
-        { left: 670, top: 570 },
-        { left: 300, top: 250 },
-        { left: 520, top: 170 },
-        { left: 600, top: 370 },
-        { left: 500, top: 470 },
+        { left: 200, top: 550 },
+        { left: 400, top: 350 },
+        { left: 100, top: 400 },
+        { left: 400, top: 650 },
+        { left: 200, top: 100 },
+        { left: 600, top: 150 },
+        { left: 550, top: 500 },
+        { left: 650, top: 300 },
+        { left: 800, top: 400 },
+        { left: 250, top: 200 },
+      ],
+      level4: [
+        { left: 200, top: 550 },
+        { left: 400, top: 350 },
+        { left: 100, top: 400 },
+        { left: 400, top: 650 },
+        { left: 200, top: 100 },
+        { left: 600, top: 150 },
+        { left: 550, top: 500 },
+        { left: 650, top: 300 },
+        { left: 800, top: 400 },
+        { left: 250, top: 200 },
+      ],
+      level5: [
+        { left: 200, top: 550 },
+        { left: 400, top: 350 },
+        { left: 100, top: 400 },
+        { left: 400, top: 650 },
+        { left: 200, top: 100 },
+        { left: 600, top: 150 },
+        { left: 550, top: 500 },
+        { left: 650, top: 300 },
+        { left: 800, top: 400 },
+        { left: 250, top: 200 },
+      ],
+      level6: [
+        { left: 200, top: 550 },
+        { left: 400, top: 350 },
+        { left: 100, top: 400 },
+        { left: 400, top: 650 },
+        { left: 200, top: 100 },
+        { left: 600, top: 150 },
+        { left: 550, top: 500 },
+        { left: 650, top: 300 },
+        { left: 800, top: 400 },
+        { left: 250, top: 200 },
+      ],
+      level7: [
+        { left: 200, top: 550 },
+        { left: 400, top: 350 },
+        { left: 100, top: 400 },
+        { left: 400, top: 650 },
+        { left: 200, top: 100 },
+        { left: 600, top: 150 },
+        { left: 550, top: 500 },
+        { left: 650, top: 300 },
+        { left: 800, top: 400 },
+        { left: 250, top: 200 },
+      ],
+      level8: [
+        { left: 200, top: 550 },
+        { left: 400, top: 350 },
+        { left: 100, top: 400 },
+        { left: 400, top: 650 },
+        { left: 200, top: 100 },
+        { left: 600, top: 150 },
+        { left: 550, top: 500 },
+        { left: 650, top: 300 },
+        { left: 800, top: 400 },
+        { left: 250, top: 200 },
+      ],
+      level9: [
+        { left: 200, top: 550 },
+        { left: 400, top: 350 },
+        { left: 100, top: 400 },
+        { left: 400, top: 650 },
+        { left: 200, top: 100 },
+        { left: 600, top: 150 },
+        { left: 550, top: 500 },
+        { left: 650, top: 300 },
+        { left: 800, top: 400 },
+        { left: 250, top: 200 },
+      ],
+      level10: [
+         { left: 200, top: 550 },
+        { left: 400, top: 350 },
+        { left: 100, top: 400 },
+        { left: 400, top: 650 },
+        { left: 200, top: 100 },
+        { left: 600, top: 150 },
+        { left: 550, top: 500 },
+        { left: 650, top: 300 },
+        { left: 800, top: 400 },
+        { left: 250, top: 200 },
       ],
     };
     this.currentPlatform = this.platformPositions.level0; // initial platform positions
@@ -145,20 +147,20 @@ class Game {
     this.height = 700;
     this.width = 1000;
     this.lastTimestamp = 0;
-    this.fixedTimeStep = 1 / 60; // 60 FPS
+    this.fixedTimeStep = 1 / 60;
 
     this.levels = [
       "./images/level0.png",
       "./images/level1.png",
       "./images/level2.png",
       "./images/level3.png",
-      // "./images/level4.png",
-      // "./images/level5.png",
-      // "./images/level6.png",
-      // "./images/level7.png",
-      // "./images/level8.png",
-      // "./images/level9.png",
-      // "./images/level10.png",
+      "./images/level4.png",
+      "./images/level5.png",
+      "./images/level6.png",
+      "./images/level7.png",
+      "./images/level8.png",
+      "./images/level9.png",
+      "./images/level10.png",
     ];
     this.currentLevel = 0;
     this.levelCounter = document.getElementById("level"); // to update level count
@@ -169,7 +171,6 @@ class Game {
   }
 
   createPlatforms(gameScreen, platformPositions) {
-    // creates platform objects based on provided positions
     platformPositions.forEach((position) => {
       this.platforms.push(new Platform(gameScreen, position.left, position.top, 100, 20));
     });
@@ -177,7 +178,6 @@ class Game {
   }
 
   removePlatforms() {
-    // removes platform elements from the DOM
     document.querySelectorAll(".platform").forEach((e) => {
       e.remove()
     })
@@ -197,7 +197,6 @@ class Game {
     if (this.gameIsOver) {
       return;
     }
-    // test code
     if (!this.lastTimestamp) {
       this.lastTimestamp = timestamp;
     }
@@ -205,50 +204,43 @@ class Game {
     const deltaTime = (timestamp - this.lastTimestamp) / 1000; // Convert to seconds
     this.lastTimestamp = timestamp;
 
-    this.update(deltaTime); // Pass deltaTime to the update method
+    this.update(deltaTime); 
 
     window.requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
   }
-  //   this.update();
-
-  //   window.requestAnimationFrame(() => this.gameLoop());
-  // }
 
   update(deltaTime) {
     this.player.move(deltaTime);
-    // CHANGE NUMBER FOR MORE LEVELS
-    if (!this.hasCollectedItem && this.currentLevel === 3) {
+    if (!this.hasCollectedItem && this.currentLevel === 10) {
       if (this.player.isCollidingWith(this.collectibleItem)) {
         this.hasCollectedItem = true;
         this.showWinScreen();
       }
     }
 
-    // detecting and interacting with platforms
-    for (const platform of this.platforms) {  // iterating through each platform in the platforms array.
-      this.player.isCollidingWith(platform);  // calling method to check if the player is colliding with the current platform.
+    for (const platform of this.platforms) {  
+      this.player.isCollidingWith(platform);  
       if (this.player.isCollidingWith(platform)) {
-        this.player.handlePlatformCollision(platform);  // calling the method of the player object, passing the platform as an argument.
+        this.player.handlePlatformCollision(platform);  
       }
     }
 
-    if (this.player.top + this.player.height <= 0) { // checks if the top edge of the player (plus its height) is above the screen.
+    if (this.player.top + this.player.height <= 0) { 
 
-      if (this.currentLevel < this.levels.length - 1) { // to check if there are more levels
+      if (this.currentLevel < this.levels.length - 1) { 
         this.currentLevel++;
-        this.removePlatforms(); // calling a function to remove the existing platforms
-        this.platforms = [];  // reseting the platforms array.
-        this.createPlatforms(this.gameScreen, this.platformPositions["level" + this.currentLevel]); // creating new platforms for the next level using a function, passing the game screen element and positions for the new level.
+        this.removePlatforms(); 
+        this.platforms = [];  
+        this.createPlatforms(this.gameScreen, this.platformPositions["level" + this.currentLevel]); 
 
-        this.gameScreen.style.backgroundImage = `url('${this.levels[this.currentLevel]  // updating the background image of the game screen to the one specified for the next level.
+        this.gameScreen.style.backgroundImage = `url('${this.levels[this.currentLevel] 
           }')`;
-        this.player.top = 650; // players position
+        this.player.top = 650; 
 
-        this.updateLevelCounter(); // to update the level counter
+        this.updateLevelCounter(); 
       }
 
-      // CHANGE NUMBER FOR MORE LEVELS
-      if (this.currentLevel === 3 && !this.collectibleItem) { // show item at level 3
+      if (this.currentLevel === 10 && !this.collectibleItem) { 
         this.collectibleItem = new Collectible(
           this.gameScreen,
           550,
@@ -262,7 +254,7 @@ class Game {
   }
 
   updateLevelCounter() {
-    this.levelCounter.textContent = this.currentLevel; // updates the level counter text
+    this.levelCounter.textContent = this.currentLevel;
   }
 
   showWinScreen() {

@@ -51,20 +51,6 @@ window.onload = function () {
     }
   }
 
-  function handleKeyup(event) {
-    const key = event.key.toLowerCase();
-
-    if ((key === "arrowleft" || key === "a") && game.player.directionX < 0) {
-      game.player.directionX = 0;
-      event.preventDefault();
-    }
-
-    if ((key === "arrowright" || key === "d") && game.player.directionX > 0) {
-      game.player.directionX = 0;
-      event.preventDefault();
-    }
-  }
-
   window.addEventListener("keydown", handleKeydown);
   window.addEventListener("keyup", handleKeyup);
 
