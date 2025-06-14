@@ -44,16 +44,6 @@ body {
   justify-content: center;
 }
 
-/* #game-screen {
-  text-align: left;
-  display: none;
-  padding: 20px 0px;
-  overflow: hidden;
-  position: relative;
-  background-image: url(./images/level0.png);
-  background-size: cover;
-} */
-
 #game-screen {
   width: 800px;
   height: auto; 
